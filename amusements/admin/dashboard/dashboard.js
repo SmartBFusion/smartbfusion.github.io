@@ -239,6 +239,28 @@ function renderSummary(data) {
   document.getElementById('idle-seconds').textContent = formatSeconds(s.idle_seconds);
   document.getElementById('sessions-count').textContent = s.sessions_count || 0;
   document.getElementById('last-updated').textContent = data.to ? `Last updated: ${formatDate(data.to)}` : '';
+
+  // Per-headset summary section
+  let perHeadsetDiv = document.getElementById('per-headset-summary');
+  if (!perHeadsetDiv) {
+    perHeadsetDiv = document.createElement('div');
+    perHeadsetDiv.id = 'per-headset-summary';
+    perHeadsetDiv.style = 'margin-top:16px;';
+    const parent = document.getElementById('summary-cards') || document.body;
+    parent.appendChild(perHeadsetDiv);
+  }
+  // If per_headset missing, hide section
+  if (!Array.isArray(data.per_headset)) {
+    perHeadsetDiv.style.display = 'none';
+    return;
+  }
+  perHeadsetDiv.style.display = '';
+  let html = `<div style="font-weight:bold;margin-bottom:4px;">Per Headset</div><table style="width:auto;min-width:320px;font-size:0.97em;"><thead><tr><th>Headset</th><th>Operating</th><th>Game</th><th>Idle</th><th>Sessions</th></tr></thead><tbody>`;
+  for (const h of data.per_headset) {
+    html += `<tr><td>${h.headset_name||h.headset_serial||''}</td><td>${formatSeconds(h.online_seconds)}</td><td>${formatSeconds(h.game_seconds)}</td><td>${formatSeconds(h.idle_seconds)}</td><td>${h.sessions_count||0}</td></tr>`;
+  }
+  html += '</tbody></table>';
+  perHeadsetDiv.innerHTML = html;
 }
 function renderGameTotals(data) {
   const container = document.getElementById('game-totals-table-container');
@@ -265,8 +287,17 @@ function renderTimeline(data) {
   const container = document.getElementById('timeline-table-container');
   if (!container) return;
   let sessions = (data.sessions||[]).slice();
-  // Filter by headset
-  if (currentHeadset) sessions = sessions.filter(s=>s.headset_name===currentHeadset);
+  // Filter by headset (use headset_serial as stable key)
+  if (currentHeadset) {
+    // Find serial for selected name (for backward compat, allow name or serial)
+    let serial = currentHeadset;
+    // Try to map name to serial if per_headset exists
+    if (Array.isArray(data.per_headset)) {
+      const found = data.per_headset.find(h => h.headset_name === currentHeadset || h.headset_serial === currentHeadset);
+      if (found) serial = found.headset_serial;
+    }
+    sessions = sessions.filter(s=>s.headset_serial===serial || s.headset_name===currentHeadset);
+  }
   // Filter by search
   if (currentSearch) {
     const q = currentSearch.toLowerCase();
@@ -334,8 +365,18 @@ function renderTimeline(data) {
 function renderHeadsetFilter(data) {
   const sel = document.getElementById('headset-select');
   if (!sel) return;
-  const headsets = Array.from(new Set((data.sessions||[]).map(s=>s.headset_name).filter(Boolean)));
-  sel.innerHTML = `<option value="">All</option>` + headsets.map(h=>`<option value="${h}">${h}</option>`).join('');
+  let headsets = [];
+  // Prefer per_headset for filter options
+  if (Array.isArray(data.per_headset)) {
+    headsets = data.per_headset.map(h => ({
+      label: h.headset_name || h.headset_serial,
+      value: h.headset_serial
+    }));
+  } else {
+    // fallback: use sessions
+    headsets = Array.from(new Set((data.sessions||[]).map(s=>s.headset_name).filter(Boolean))).map(h=>({label:h,value:h}));
+  }
+  sel.innerHTML = `<option value="">All</option>` + headsets.map(h=>`<option value="${h.value}">${h.label}</option>`).join('');
   sel.value = currentHeadset;
 }
 function updateAll(data) {
