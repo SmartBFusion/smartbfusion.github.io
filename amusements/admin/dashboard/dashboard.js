@@ -228,6 +228,52 @@ function formatDate(dt) {
   const d = new Date(dt);
   return d.toLocaleString();
 }
+function formatSar(amount) {
+  const n = Number(amount);
+  if (!Number.isFinite(n)) return '--';
+  // Keep it simple (SAR)
+  return `${n.toFixed(2)} SAR`;
+}
+function getSessionRevenueSar(s) {
+  // Worker now returns revenue_sar; fallback to 0 if missing
+  const rev = Number(s?.revenue_sar);
+  if (Number.isFinite(rev)) return rev;
+  return 0;
+}
+function isOwnerSession(s) {
+  // Worker returns is_owner (0/1) and/or billable (0/1)
+  if (s && (s.is_owner === 1 || s.is_owner === true)) return true;
+  if (s && (s.billable === 0 || s.billable === false)) return true;
+  return false;
+}
+function isBillableSession(s) {
+  if (s && (s.billable === 0 || s.billable === false)) return false;
+  return true;
+}
+async function deleteSessionOnServer(session) {
+  const token = getToken();
+  if (!token) throw new Error('Not logged in');
+  const sid = session?.session_id;
+  const dbId = session?.id;
+  const payload = { arcade_id: ARCADE_ID };
+  if (sid) payload.session_id = sid;
+  else if (dbId != null) payload.db_id = dbId;
+  else throw new Error('Session has no id');
+
+  const res = await fetch(`${API_BASE}/dashboard/session/delete`, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data.ok) {
+    throw new Error(data.error || `Delete failed (${res.status})`);
+  }
+  return data;
+}
 function clearTable(id) {
   const el = document.getElementById(id);
   if (el) el.innerHTML = '';
@@ -238,6 +284,15 @@ function renderSummary(data) {
   document.getElementById('game-seconds').textContent = formatSeconds(s.game_seconds);
   document.getElementById('idle-seconds').textContent = formatSeconds(s.idle_seconds);
   document.getElementById('sessions-count').textContent = s.sessions_count || 0;
+  // Revenue: prefer summary.revenue_sar, fallback compute from sessions
+  let revenue = Number(s.revenue_sar);
+  if (!Number.isFinite(revenue)) {
+    revenue = (data.sessions || []).reduce((sum, sess) => {
+      return sum + (isBillableSession(sess) ? getSessionRevenueSar(sess) : 0);
+    }, 0);
+  }
+  const revEl = document.getElementById('revenue-sar');
+  if (revEl) revEl.textContent = formatSar(revenue);
   document.getElementById('last-updated').textContent = data.to ? `Last updated: ${formatDate(data.to)}` : '';
 
   // Per-headset summary section
@@ -267,9 +322,10 @@ function renderGameTotals(data) {
   if (!container) return;
   const totals = (data.game_totals||[]).slice();
   totals.sort((a,b)=>b.total_seconds-a.total_seconds);
-  let html = `<table class='game-totals-table'><thead><tr><th>Game</th><th>Sessions</th><th>Total Time</th></tr></thead><tbody>`;
+  let html = `<table class='game-totals-table'><thead><tr><th>Game</th><th>Sessions</th><th>Total Time</th><th>Revenue</th></tr></thead><tbody>`;
   for (const g of totals) {
-    html += `<tr class='game-row' data-game='${g.game_package}'><td>${g.game_package}</td><td>${g.sessions}</td><td>${formatSeconds(g.total_seconds)}</td></tr>`;
+    const rev = (g && Number.isFinite(Number(g.revenue_sar))) ? Number(g.revenue_sar) : 0;
+    html += `<tr class='game-row' data-game='${g.game_package}'><td>${g.game_package}</td><td>${g.sessions}</td><td>${formatSeconds(g.total_seconds)}</td><td>${formatSar(rev)}</td></tr>`;
   }
   html += '</tbody></table>';
   container.innerHTML = html;
@@ -337,15 +393,59 @@ function renderTimeline(data) {
     <th data-col='type'>Type</th>
     <th data-col='headset'>Headset</th>
     <th data-col='game'>Game</th>
+    <th data-col='revenue'>Revenue</th>
+    <th>Actions</th>
   </tr></thead><tbody>`;
   for (const s of pageSessions) {
     const start = formatDate(s.started_at);
     const end = s.ended_at ? formatDate(s.ended_at) : '<span style="color:#ff6b6b">Running</span>';
     const dur = s.ended_at ? formatSeconds(s.duration_seconds) : formatSeconds(Math.floor((Date.now()-Date.parse(s.started_at))/1000));
-    html += `<tr><td>${start}</td><td>${end}</td><td>${dur}</td><td>Game</td><td>${s.headset_name||''}</td><td>${s.game_package||''}</td></tr>`;
+    const owner = isOwnerSession(s);
+    const type = owner
+      ? `<span style="color:#f59e0b;font-weight:700;">OWNER</span>`
+      : `<span style="color:#22c55e;font-weight:700;">BILLABLE</span>`;
+    const revenue = owner ? 0 : getSessionRevenueSar(s);
+    const canDelete = !!(s.session_id || s.id);
+    const deleteBtn = canDelete
+      ? `<button class="refresh-btn" style="padding:6px 10px;background:#ff6b6b;border-color:#ff6b6b;" data-del-session="${(s.session_id||'')}" data-del-db="${(s.id||'')}">Delete</button>`
+      : '';
+    html += `<tr>
+      <td>${start}</td>
+      <td>${end}</td>
+      <td>${dur}</td>
+      <td>${type}</td>
+      <td>${s.headset_name||''}</td>
+      <td>${s.game_package||''}</td>
+      <td>${formatSar(revenue)}</td>
+      <td>${deleteBtn}</td>
+    </tr>`;
   }
   html += '</tbody></table>';
   container.innerHTML = html;
+
+  // Wire delete buttons
+  container.querySelectorAll('button[data-del-session], button[data-del-db]').forEach(btn => {
+    btn.onclick = async () => {
+      try {
+        const sid = btn.getAttribute('data-del-session') || '';
+        const db = btn.getAttribute('data-del-db') || '';
+        const match = pageSessions.find(x => (sid && x.session_id === sid) || (!sid && db && String(x.id) === String(db)));
+        if (!match) return;
+        const ok = confirm(`Delete this session?\n\n${match.game_package || ''}\n${match.headset_name || ''}\n${match.started_at || ''}`);
+        if (!ok) return;
+        btn.disabled = true;
+        btn.textContent = 'Deleting...';
+        await deleteSessionOnServer(match);
+        // Refresh
+        fetchHistory();
+      } catch (e) {
+        alert(`Delete failed: ${e.message || e}`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Delete';
+      }
+    };
+  });
   // Table sorting
   container.querySelectorAll('th[data-col]').forEach(th => {
     th.style.cursor = 'pointer';
