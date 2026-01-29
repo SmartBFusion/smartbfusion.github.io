@@ -274,6 +274,25 @@ async function deleteSessionOnServer(session) {
   }
   return data;
 }
+
+async function resetHeadsetHistoryOnServer(headsetSerial) {
+  const token = getToken();
+  if (!token) throw new Error('Not logged in');
+  const payload = { arcade_id: ARCADE_ID, headset_serial: headsetSerial };
+  const res = await fetch(`${API_BASE}/dashboard/headset/reset`, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data.ok) {
+    throw new Error(data.error || `Reset failed (${res.status})`);
+  }
+  return data;
+}
 function clearTable(id) {
   const el = document.getElementById(id);
   if (el) el.innerHTML = '';
@@ -310,12 +329,48 @@ function renderSummary(data) {
     return;
   }
   perHeadsetDiv.style.display = '';
-  let html = `<div style="font-weight:bold;margin-bottom:4px;">Per Headset</div><table style="width:auto;min-width:320px;font-size:0.97em;"><thead><tr><th>Headset</th><th>Operating</th><th>Game</th><th>Idle</th><th>Sessions</th></tr></thead><tbody>`;
+  let html = `<div style="font-weight:bold;margin-bottom:4px;">Per Headset</div><table style="width:auto;min-width:320px;font-size:0.97em;"><thead><tr><th>Headset</th><th>Operating</th><th>Game</th><th>Idle</th><th>Sessions</th><th>Actions</th></tr></thead><tbody>`;
   for (const h of data.per_headset) {
-    html += `<tr><td>${h.headset_name||h.headset_serial||''}</td><td>${formatSeconds(h.online_seconds)}</td><td>${formatSeconds(h.game_seconds)}</td><td>${formatSeconds(h.idle_seconds)}</td><td>${h.sessions_count||0}</td></tr>`;
+    const label = h.headset_name||h.headset_serial||'';
+    const serial = h.headset_serial||'';
+    const canReset = !!serial;
+    const resetBtn = canReset
+      ? `<button class="refresh-btn" style="padding:4px 8px;font-size:0.8em;" data-reset-serial="${serial}" data-reset-name="${label}">Reset</button>`
+      : '';
+    html += `<tr>
+      <td>${label}</td>
+      <td>${formatSeconds(h.online_seconds)}</td>
+      <td>${formatSeconds(h.game_seconds)}</td>
+      <td>${formatSeconds(h.idle_seconds)}</td>
+      <td>${h.sessions_count||0}</td>
+      <td>${resetBtn}</td>
+    </tr>`;
   }
   html += '</tbody></table>';
   perHeadsetDiv.innerHTML = html;
+
+  // Wire per-headset reset buttons
+  perHeadsetDiv.querySelectorAll('button[data-reset-serial]').forEach(btn => {
+    btn.onclick = async () => {
+      const serial = btn.getAttribute('data-reset-serial');
+      const label = btn.getAttribute('data-reset-name') || serial;
+      if (!serial) return;
+      const ok = confirm(`Completely reset history for headset:\n\n${label}\n(${serial})\n\nThis will wipe operating/game/idle/session history for this headset from the dashboard.`);
+      if (!ok) return;
+      try {
+        btn.disabled = true;
+        btn.textContent = 'Resetting...';
+        await resetHeadsetHistoryOnServer(serial);
+        // Reload history to refresh all summaries
+        fetchHistory();
+      } catch (e) {
+        alert(`Reset failed: ${e.message || e}`);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Reset';
+      }
+    };
+  });
 }
 function renderGameTotals(data) {
   const container = document.getElementById('game-totals-table-container');
