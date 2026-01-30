@@ -53,8 +53,42 @@
 
 // --- Live VR Data Dashboard Additions ---
 const API_BASE = 'https://smartverse-vr-api.smartbf.workers.dev';
-const ARCADE_ID = 'smartbf-arcade-01';
+const ARCADE_ID_KEY = 'admin_arcade_id';
+const DEFAULT_ARCADE_ID = 'smartbf-arcade-01';
 const POLL_INTERVAL = 10000;
+
+// Arcade ID format: smartbf-arcade-<locationname> (mandatory prefix; locationname = site name)
+function getLocationName(arcadeId) {
+  if (!arcadeId || typeof arcadeId !== 'string') return '—';
+  const id = arcadeId.trim();
+  const prefix = 'smartbf-arcade-';
+  if (id.toLowerCase().startsWith(prefix)) {
+    const loc = id.slice(prefix.length).trim();
+    if (!loc) return '—';
+    return loc.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+  }
+  return id || '—';
+}
+
+function getArcadeId() {
+  const params = new URLSearchParams(location.search);
+  const fromUrl = params.get('arcade_id') || params.get('arcade_id'.toLowerCase());
+  if (fromUrl && fromUrl.trim()) return fromUrl.trim();
+  try {
+    const stored = localStorage.getItem(ARCADE_ID_KEY);
+    if (stored && stored.trim()) return stored.trim();
+  } catch (_) {}
+  return DEFAULT_ARCADE_ID;
+}
+function setArcadeId(value) {
+  const v = (value && value.trim()) ? value.trim() : DEFAULT_ARCADE_ID;
+  try { localStorage.setItem(ARCADE_ID_KEY, v); } catch (_) {}
+  return v;
+}
+function updateLocationDisplay() {
+  const el = document.getElementById('location-display');
+  if (el) el.textContent = 'Location: ' + getLocationName(getArcadeId());
+}
 
 let lastData = null;
 let pollTimeout = null;
@@ -114,12 +148,14 @@ function renderDashboard(data) {
 }
 
 function pollStatus() {
+  if (!document.getElementById('headsets-table')) return;
   const token = localStorage.getItem('admin_token');
   if (!token) {
     window.location.href = getLoginUrl();
     return;
   }
-  fetch(`${API_BASE}/dashboard/status?arcade_id=${ARCADE_ID}`, {
+  const arcadeId = getArcadeId();
+  fetch(`${API_BASE}/dashboard/status?arcade_id=${encodeURIComponent(arcadeId)}`, {
     headers: { 'Authorization': 'Bearer ' + token }
   })
     .then(async res => {
@@ -129,9 +165,12 @@ function pollStatus() {
         return;
       }
       if (res.status === 404) {
-        document.getElementById('headsets-table').innerHTML = '<div>No data yet. Waiting for first status update...</div>';
-        document.getElementById('games-list').textContent = '';
-        document.getElementById('updated-at').textContent = '';
+        const headsetsTable = document.getElementById('headsets-table');
+        if (headsetsTable) headsetsTable.innerHTML = '<div>No data yet. Waiting for first status update...</div>';
+        const gamesList = document.getElementById('games-list');
+        if (gamesList) gamesList.textContent = '';
+        const updatedAt = document.getElementById('updated-at');
+        if (updatedAt) updatedAt.textContent = '';
         showOfflineBanner(false);
         showStaleIndicator(0);
         lastData = null;
@@ -187,10 +226,6 @@ let authChecked = false;
 
 function getToken() {
   return localStorage.getItem(TOKEN_KEY);
-}
-function getLoginUrl() {
-  if (location.protocol === 'file:') return '../index.html';
-  return '/amusements/admin';
 }
 function showOverlay(show) {
   const overlay = document.getElementById('access-check-overlay');
@@ -255,7 +290,7 @@ async function deleteSessionOnServer(session) {
   if (!token) throw new Error('Not logged in');
   const sid = session?.session_id;
   const dbId = session?.id;
-  const payload = { arcade_id: ARCADE_ID };
+  const payload = { arcade_id: getArcadeId() };
   if (sid) payload.session_id = sid;
   else if (dbId != null) payload.db_id = dbId;
   else throw new Error('Session has no id');
@@ -278,7 +313,7 @@ async function deleteSessionOnServer(session) {
 async function resetHeadsetHistoryOnServer(headsetSerial) {
   const token = getToken();
   if (!token) throw new Error('Not logged in');
-  const payload = { arcade_id: ARCADE_ID, headset_serial: headsetSerial };
+  const payload = { arcade_id: getArcadeId(), headset_serial: headsetSerial };
   const res = await fetch(`${API_BASE}/dashboard/headset/reset`, {
     method: 'POST',
     headers: {
@@ -314,13 +349,13 @@ function renderSummary(data) {
   if (revEl) revEl.textContent = formatSar(revenue);
   document.getElementById('last-updated').textContent = data.to ? `Last updated: ${formatDate(data.to)}` : '';
 
-  // Per-headset summary section
+  // Per-headset summary section (append inside summary section for correct layout)
   let perHeadsetDiv = document.getElementById('per-headset-summary');
   if (!perHeadsetDiv) {
     perHeadsetDiv = document.createElement('div');
     perHeadsetDiv.id = 'per-headset-summary';
     perHeadsetDiv.style = 'margin-top:16px;';
-    const parent = document.getElementById('summary-cards') || document.body;
+    const parent = document.getElementById('summary-section') || document.body;
     parent.appendChild(perHeadsetDiv);
   }
   // If per_headset missing, hide section
@@ -555,7 +590,8 @@ function fetchHistory() {
   showError('');
   const token = getToken();
   if (!token) return;
-  let url = `${API_BASE}/dashboard/history?arcade_id=${ARCADE_ID}&range=${currentRange}&sort=${currentSort}`;
+  const arcadeId = getArcadeId();
+  let url = `${API_BASE}/dashboard/history?arcade_id=${encodeURIComponent(arcadeId)}&range=${currentRange}&sort=${currentSort}`;
   fetch(url, { headers: { 'Authorization': 'Bearer ' + token } })
     .then(async res => {
       if (!res.ok) throw new Error('Fetch failed');
@@ -583,6 +619,20 @@ function fetchHistory() {
     });
 }
 function setupControls() {
+  const arcadeInput = document.getElementById('arcade-id-input');
+  if (arcadeInput) {
+    arcadeInput.value = getArcadeId();
+    arcadeInput.addEventListener('change', () => {
+      setArcadeId(arcadeInput.value);
+      updateLocationDisplay();
+      currentPage = 1;
+      fetchHistory();
+    });
+    arcadeInput.addEventListener('blur', () => {
+      arcadeInput.value = getArcadeId();
+    });
+  }
+  updateLocationDisplay();
   document.getElementById('range-select').onchange = e => {
     currentRange = e.target.value;
     currentPage = 1;

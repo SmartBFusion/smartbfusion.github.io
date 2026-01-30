@@ -14,6 +14,7 @@
     <header class="dashboard-header">
       <h1 class="dashboard-title">Admin Dashboard</h1>
       <p class="subtext">Smart Business Fusion – Internal</p>
+      <p id="location-display" class="location-display" title="Parsed from Arcade ID (smartbf-arcade-locationname)"></p>
       <button id="logout-btn" class="logout-btn">Logout</button>
     </header>
     <main class="dashboard-main">
@@ -32,6 +33,9 @@
       </section>
       <section class="dashboard-card" id="controls-section">
         <div class="controls-row">
+          <label>Arcade ID:
+            <input type="text" id="arcade-id-input" placeholder="e.g. smartbf-arcade-01" title="Must match the Arcade ID set on the Hub app" />
+          </label>
           <label>Range:
             <select id="range-select">
               <option value="1h">Last 1 hour</option>
