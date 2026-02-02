@@ -25,9 +25,10 @@
       failAndRedirect();
       return;
     }
-    fetch('https://smartverse-vr-api.smartbf.workers.dev/admin/me', {
+    fetch('https://smartverse-vr-api.smartbf.workers.dev/admin/me?_t=' + Date.now(), {
       method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + token }
+      headers: { 'Authorization': 'Bearer ' + token },
+      cache: 'no-store'
     })
     .then(async res => {
       if (!res.ok) {
@@ -107,7 +108,8 @@ function showStaleIndicator(ageSec) {
   const stale = document.getElementById('stale-indicator');
   if (stale) {
     if (ageSec > 60) {
-      stale.textContent = `Stale data (${ageSec}s old)`;
+      const hint = ageSec > 120 ? ' — VR Hub may need restart' : '';
+      stale.textContent = `Stale data (${ageSec}s old)${hint}`;
       stale.style.display = '';
     } else {
       stale.style.display = 'none';
@@ -155,8 +157,10 @@ function pollStatus() {
     return;
   }
   const arcadeId = getArcadeId();
-  fetch(`${API_BASE}/dashboard/status?arcade_id=${encodeURIComponent(arcadeId)}`, {
-    headers: { 'Authorization': 'Bearer ' + token }
+  const statusUrl = `${API_BASE}/dashboard/status?arcade_id=${encodeURIComponent(arcadeId)}&_t=${Date.now()}`;
+  fetch(statusUrl, {
+    headers: { 'Authorization': 'Bearer ' + token },
+    cache: 'no-store'
   })
     .then(async res => {
       if (res.status === 401) {
@@ -210,6 +214,9 @@ window.startDashboard = function() {
 const HISTORY_CACHE_KEY = 'admin_history_cache';
 const TOKEN_KEY = 'admin_token';
 const PAGE_SIZE = 25;
+const HISTORY_POLL_INTERVAL_MS = 15000;  // Normal: poll every 15s for near real-time sync
+const STALE_POLL_INTERVAL_MS = 8000;     // When data > 60s old: poll every 8s until fresh
+let historyPollTimeout = null;
 
 let currentData = null;
 let currentPage = 1;
@@ -242,7 +249,8 @@ function showBanner(msg) {
 function showStaleBadge(show, ageSec) {
   const badge = document.getElementById('stale-indicator');
   if (badge) {
-    badge.textContent = show ? `Stale data (${ageSec}s old)` : '';
+    const hint = ageSec > 120 ? ' — VR Hub may need restart' : '';
+    badge.textContent = show ? `Stale data (${ageSec}s old)${hint}` : '';
     badge.style.display = show ? '' : 'none';
   }
 }
@@ -582,6 +590,12 @@ function cacheData(data) {
 function loadCache() {
   try { return JSON.parse(localStorage.getItem(HISTORY_CACHE_KEY)||'null'); } catch { return null; }
 }
+function scheduleNextHistoryPoll(ageSec) {
+  if (historyPollTimeout) clearTimeout(historyPollTimeout);
+  if (!getToken()) return;
+  const interval = (ageSec != null && ageSec > 60) ? STALE_POLL_INTERVAL_MS : HISTORY_POLL_INTERVAL_MS;
+  historyPollTimeout = setTimeout(() => { fetchHistory(); }, interval);
+}
 function fetchHistory() {
   offline = false;
   stale = false;
@@ -591,8 +605,11 @@ function fetchHistory() {
   const token = getToken();
   if (!token) return;
   const arcadeId = getArcadeId();
-  let url = `${API_BASE}/dashboard/history?arcade_id=${encodeURIComponent(arcadeId)}&range=${currentRange}&sort=${currentSort}`;
-  fetch(url, { headers: { 'Authorization': 'Bearer ' + token } })
+  const url = `${API_BASE}/dashboard/history?arcade_id=${encodeURIComponent(arcadeId)}&range=${currentRange}&sort=${currentSort}&_t=${Date.now()}`;
+  fetch(url, {
+    headers: { 'Authorization': 'Bearer ' + token },
+    cache: 'no-store'
+  })
     .then(async res => {
       if (!res.ok) throw new Error('Fetch failed');
       const data = await res.json();
@@ -603,19 +620,22 @@ function fetchHistory() {
       const updated = data.to ? Date.parse(data.to) : Date.now();
       const ageSec = Math.floor((Date.now()-updated)/1000);
       if (ageSec>60) { stale=true; showStaleBadge(true, ageSec); } else { showStaleBadge(false); }
+      scheduleNextHistoryPoll(ageSec);
     })
     .catch(()=>{
       offline=true;
       showBanner('Offline: showing last loaded data');
       const cached = loadCache();
+      let ageSec = 0;
       if (cached) {
         updateAll(cached);
         const updated = cached.to ? Date.parse(cached.to) : Date.now();
-        const ageSec = Math.floor((Date.now()-updated)/1000);
+        ageSec = Math.floor((Date.now()-updated)/1000);
         if (ageSec>60) { stale=true; showStaleBadge(true, ageSec); } else { showStaleBadge(false); }
       } else {
         showError('No cached data available.');
       }
+      scheduleNextHistoryPoll(ageSec);
     });
 }
 function setupControls() {
@@ -665,7 +685,10 @@ function setupAuthGuard() {
     window.location.href = getLoginUrl();
     return;
   }
-  fetch(`${API_BASE}/admin/me`, { headers: { 'Authorization': 'Bearer ' + token } })
+  fetch(`${API_BASE}/admin/me?_t=${Date.now()}`, {
+    headers: { 'Authorization': 'Bearer ' + token },
+    cache: 'no-store'
+  })
     .then(async res => {
       if (!res.ok) throw new Error('Auth failed');
       const data = await res.json();
@@ -691,6 +714,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 });
 window.addEventListener('beforeunload', function() {
+  if (historyPollTimeout) clearTimeout(historyPollTimeout);
   localStorage.removeItem('admin_token');
   localStorage.removeItem('admin_history_cache');
 });
