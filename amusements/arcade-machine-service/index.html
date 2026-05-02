@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional arcade machine maintenance, repair, and technical service">
+    <link rel="icon" type="image/png" href="../../Images/AMUIco.png">
+    <link rel="apple-touch-icon" href="../../Images/AMUIco.png">
+    <title>Arcade Machine Service</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/cursor.css">
+    <link rel="stylesheet" href="../../css/loading.css">
+    <link rel="stylesheet" href="../../css/scroll-reveal.css">
+    <link rel="stylesheet" href="../../css/premium-components.css">
+    <link rel="stylesheet" href="../../css/premium-refinements.css">
+    <link rel="stylesheet" href="../../css/custom-scrollbar.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/kinetic-typography.css">
+    <link rel="stylesheet" href="../../css/watermark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="no-select amusements-theme">
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">SMART</div>
+            <div class="loading-progress">
+                <div class="loading-progress-bar"></div>
+            </div>
+            <div class="loading-text">Loading</div>
+        </div>
+    </div>
+
+    <div id="cursor"></div>
+    <div id="cursor-trail"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div id="triangle-transition" class="triangle-transition">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polygon points="100,0 100,100 0,100"></polygon>
+        </svg>
+    </div>
+    <a href="../../" class="home-button">← Home</a>
+
+    <div id="smooth-scroll-container">
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../" class="back-button"><span class="icon"></span> Back</a> <span>/</span>
+                    <a href="../">SMART Amusement World</a> <span>/</span>
+                    <span>Arcade Machine Service</span>
+                </nav>
+                <div class="brand-lockup vertical">
+                    <img src="../../Images/SMARTAmusement.png" alt="SMART Amusement World logo">
+                    <h1>Arcade Machine Service</h1>
+                </div>
+                <p class="page-subtitle">Technical maintenance and repair services</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="service-overview">
+                    <div class="service-intro">
+                        <h2>Professional Technical Service</h2>
+                        <p>Our service division provides comprehensive maintenance, diagnostics, and repair for arcade and amusement equipment. We operate with technical precision and industry-standard procedures.</p>
+                    </div>
+                </div>
+
+                <div class="services-detail">
+                    <article class="service-item">
+                        <h3>Preventive Maintenance</h3>
+                        <p>Scheduled maintenance programs designed to extend equipment lifespan and minimize downtime. Includes:</p>
+                        <ul>
+                            <li>Regular system diagnostics</li>
+                            <li>Component cleaning and calibration</li>
+                            <li>Wear assessment and part replacement scheduling</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </article>
+
+                    <article class="service-item">
+                        <h3>Diagnostic Services</h3>
+                        <p>Technical troubleshooting and fault identification for operational issues:</p>
+                        <ul>
+                            <li>Electrical system testing</li>
+                            <li>Mechanical component inspection</li>
+                            <li>Software and firmware diagnostics</li>
+                            <li>Performance analysis reporting</li>
+                        </ul>
+                    </article>
+
+                    <article class="service-item">
+                        <h3>Repair Services</h3>
+                        <p>On-site and workshop repair capabilities for all arcade machine types:</p>
+                        <ul>
+                            <li>Component replacement and repair</li>
+                            <li>PCB troubleshooting and repair</li>
+                            <li>Mechanical system restoration</li>
+                            <li>Emergency service response</li>
+                        </ul>
+                    </article>
+
+                    <article class="service-item">
+                        <h3>Technical Support</h3>
+                        <p>Ongoing technical assistance and consultation:</p>
+                        <ul>
+                            <li>Remote diagnostics and guidance</li>
+                            <li>Technical documentation and manuals</li>
+                            <li>Training for facility maintenance staff</li>
+                            <li>Equipment upgrade consultation</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="contact-cta">
+                    <h2>Service Inquiries</h2>
+                    <p>Contact our service department to schedule maintenance or discuss repair requirements.</p>
+                    <a href="mailto:services@smartbusinessfusion.com" class="btn-primary">Contact Service Department</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-card">
+                    <div class="brand-lockup">
+                        <img src="../../Images/SMARTIco.png" alt="SMART Holding Business Fusion icon">
+                        <h3>SMART Holding Business Fusion</h3>
+                    </div>
+                    <p class="footer-tagline">Precision field service, repairs, and uptime programs for arcade operations.</p>
+                    <span class="footer-pill">Arcade Machine Service</span>
+                </div>
+                <div class="footer-card">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:SMART@smartbusinessfusion.com">Main: SMART@smartbusinessfusion.com</a></li>
+                        <li><a href="mailto:info@smartbusinessfusion.com">Info: info@smartbusinessfusion.com</a></li>
+                        <li><a href="mailto:arcade@smartbusinessfusion.com">Arcade: arcade@smartbusinessfusion.com</a></li>
+                        <li><a href="mailto:services@smartbusinessfusion.com">Services: services@smartbusinessfusion.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-card">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="../">SMART Amusement World</a></li>
+                        <li><a href="../../academy/">SMART Educational Academy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> SMART Holding Business Fusion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <div class="dev-watermark">
+        <button class="dev-badge" type="button" aria-label="Developer watermark">
+            <span class="dev-logo" aria-hidden="true"></span>
+            <span class="dev-text">Made with <span class="dev-heart">❤️</span> by <strong>Nawaf Mohammed Ashraff</strong></span>
+        </button>
+    </div>
+    </div>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/loading.js"></script>
+    <script src="../../js/custom-scroll.js"></script>
+    <script src="../../js/3d-background.js"></script>
+    <script src="../../js/cursor.js"></script>
+    <script src="../../js/scroll-animations.js"></script>
+    <script src="../../js/premium-animations.js"></script>
+    <script src="../../js/security.js"></script>
+</body>
+</html>

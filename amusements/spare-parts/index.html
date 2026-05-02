@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arcade machine spare parts and components">
+    <link rel="icon" type="image/png" href="../../Images/AMUIco.png">
+    <link rel="apple-touch-icon" href="../../Images/AMUIco.png">
+    <title>Spare Parts</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/cursor.css">
+    <link rel="stylesheet" href="../../css/loading.css">
+    <link rel="stylesheet" href="../../css/scroll-reveal.css">
+    <link rel="stylesheet" href="../../css/premium-components.css">
+    <link rel="stylesheet" href="../../css/premium-refinements.css">
+    <link rel="stylesheet" href="../../css/custom-scrollbar.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/kinetic-typography.css">
+    <link rel="stylesheet" href="../../css/watermark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="no-select amusements-theme">
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">SMART</div>
+            <div class="loading-progress">
+                <div class="loading-progress-bar"></div>
+            </div>
+            <div class="loading-text">Loading</div>
+        </div>
+    </div>
+
+    <div id="cursor"></div>
+    <div id="cursor-trail"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div id="triangle-transition" class="triangle-transition">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polygon points="100,0 100,100 0,100"></polygon>
+        </svg>
+    </div>
+    <a href="../../" class="home-button">← Home</a>
+
+    <div id="smooth-scroll-container">
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../" class="back-button"><span class="icon"></span> Back</a> <span>/</span>
+                    <a href="../">SMART Amusement World</a> <span>/</span>
+                    <span>Spare Parts</span>
+                </nav>
+                <div class="brand-lockup vertical">
+                    <img src="../../Images/SMARTAmusement.png" alt="SMART Amusement World logo">
+                    <h1>Spare Parts</h1>
+                </div>
+                <p class="page-subtitle">Arcade machine components and replacement parts</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="parts-layout">
+                    <aside class="filters-sidebar">
+                        <h2>Filters</h2>
+                        <div class="filter-group">
+                            <h3>Category</h3>
+                            <ul class="filter-list">
+                                <li><label><input type="checkbox"> Control Components</label></li>
+                                <li><label><input type="checkbox"> Display Systems</label></li>
+                                <li><label><input type="checkbox"> Power Supplies</label></li>
+                                <li><label><input type="checkbox"> Mechanical Parts</label></li>
+                                <li><label><input type="checkbox"> PCBs & Electronics</label></li>
+                            </ul>
+                        </div>
+                        <div class="filter-group">
+                            <h3>Manufacturer</h3>
+                            <ul class="filter-list">
+                                <li><label><input type="checkbox"> All Manufacturers</label></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <div class="products-main">
+                        <div class="products-header">
+                            <div class="search-bar">
+                                <input type="search" placeholder="Search parts by name, model, or part number" aria-label="Search spare parts">
+                                <button type="submit">Search</button>
+                            </div>
+                            <div class="view-options">
+                                <span>View:</span>
+                                <button class="view-btn active" data-view="grid">Grid</button>
+                                <button class="view-btn" data-view="list">List</button>
+                            </div>
+                        </div>
+
+                        <div class="products-grid" id="productsContainer">
+                            <!-- Product listings will be populated here -->
+                            <div class="empty-state">
+                                <p>Product catalog coming soon. Browse categories and filters above.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-card">
+                    <div class="brand-lockup">
+                        <img src="../../Images/SMARTIco.png" alt="SMART Holding Business Fusion icon">
+                        <h3>SMART Holding Business Fusion</h3>
+                    </div>
+                    <p class="footer-tagline">Parts, compatibility checks, and logistics support for arcade uptime.</p>
+                    <span class="footer-pill">Spare Parts</span>
+                </div>
+                <div class="footer-card">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:SMART@smartbusinessfusion.com">Main: SMART@smartbusinessfusion.com</a></li>
+                        <li><a href="mailto:info@smartbusinessfusion.com">Info: info@smartbusinessfusion.com</a></li>
+                        <li><a href="mailto:arcade@smartbusinessfusion.com">Arcade: arcade@smartbusinessfusion.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-card">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="../">SMART Amusement World</a></li>
+                        <li><a href="../../academy/">SMART Educational Academy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> SMART Holding Business Fusion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <div class="dev-watermark">
+        <button class="dev-badge" type="button" aria-label="Developer watermark">
+            <span class="dev-logo" aria-hidden="true"></span>
+            <span class="dev-text">Made with <span class="dev-heart">❤️</span> by <strong>Nawaf Mohammed Ashraff</strong></span>
+        </button>
+    </div>
+    </div>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/loading.js"></script>
+    <script src="../../js/custom-scroll.js"></script>
+    <script src="../../js/3d-background.js"></script>
+    <script src="../../js/cursor.js"></script>
+    <script src="../../js/scroll-animations.js"></script>
+    <script src="../../js/premium-animations.js"></script>
+    <script src="../../js/security.js"></script>
+</body>
+</html>
