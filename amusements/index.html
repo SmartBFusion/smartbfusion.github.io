@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SMART Amusement World - Arcade solutions, spare parts, and technical services">
+    <meta name="description" content="SMART Amusement World - Arcade solutions, spare parts, and technical services for operators and venue managers">
     <link rel="icon" type="image/png" href="../Images/AMUIco.png">
     <link rel="apple-touch-icon" href="../Images/AMUIco.png">
     <title>SMART Amusement World</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/cursor.css">
     <link rel="stylesheet" href="../css/loading.css">
-    <link rel="stylesheet" href="../css/scroll-reveal.css">
-    <link rel="stylesheet" href="../css/premium-components.css">
-    <link rel="stylesheet" href="../css/premium-refinements.css">
     <link rel="stylesheet" href="../css/custom-scrollbar.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    <link rel="stylesheet" href="../css/kinetic-typography.css">
+    <link rel="stylesheet" href="../css/amusements.css">
     <link rel="stylesheet" href="../css/watermark.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -27,162 +23,258 @@
     <div id="loading-screen" class="loading-screen">
         <div class="loading-content">
             <div class="loading-logo">SMART</div>
-            <div class="loading-progress">
-                <div class="loading-progress-bar"></div>
-            </div>
+            <div class="loading-progress"><div class="loading-progress-bar"></div></div>
             <div class="loading-text">Loading</div>
         </div>
     </div>
-
     <div id="cursor"></div>
     <div id="cursor-trail"></div>
     <canvas id="bg-canvas"></canvas>
     <div id="triangle-transition" class="triangle-transition">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <polygon points="100,0 100,100 0,100"></polygon>
-        </svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="100,0 100,100 0,100"></polygon></svg>
     </div>
-    <a href="../" class="home-button">← Home</a>
+
+    <nav class="a-nav" id="a-nav">
+        <div class="a-nav-inner">
+            <div class="a-nav-left">
+                <a href="../" class="a-nav-home">← SMART Holdings</a>
+                <span class="a-nav-sep">|</span>
+                <span class="a-nav-brand">Amusement World</span>
+            </div>
+            <a href="#contact" class="a-nav-cta">Get Support</a>
+        </div>
+    </nav>
 
     <div id="smooth-scroll-container">
-
     <main>
-        <section class="page-header amusements-hero">
-            <div class="container">
-                <nav class="breadcrumb">
-                    <a href="../" class="back-button"><span class="icon"></span> Back</a> <span>/</span> <span>SMART Amusement World</span>
-                </nav>
-                <div class="brand-lockup vertical">
-                    <img src="../Images/SMARTAmusement.png" alt="SMART Amusement World logo">
-                    <h1>SMART Amusement World</h1>
-                </div>
-                <p class="page-subtitle">Arcade ecosystems, field service, cinema, and parts—engineered to keep guests playing.</p>
-                <div class="cta-row hero-cta">
-                    <a class="primary-cta" href="#services">Explore Services</a>
-                    <a class="secondary-cta" href="mailto:arcade@smartbusinessfusion.com">Talk to an Expert</a>
-                </div>
-                <div class="pill-list hero-pills">
-                    <span class="pill">Arcade uptime programs</span>
-                    <span class="pill">On-site technicians</span>
-                    <span class="pill">Cinema integration</span>
-                    <span class="pill">Spare parts hub</span>
+
+        <section class="a-hero">
+            <div class="a-hero-inner">
+                <p class="a-hero-tag">SMART Amusement World</p>
+                <h1 class="a-headline">
+                    <span class="a-hl a-hl-normal">Downtime</span>
+                    <span class="a-hl a-hl-accent">is not</span>
+                    <span class="a-hl a-hl-outline">an option.</span>
+                </h1>
+                <p class="a-hero-body">We keep arcade venues and cinema facilities running. Parts, field service, and on-site support — when your business needs it most.</p>
+                <div class="a-hero-actions">
+                    <a href="#contact" class="a-btn-primary">Get Support →</a>
+                    <a href="#services" class="a-btn-ghost">Our Services</a>
                 </div>
             </div>
         </section>
 
-        <section class="amusements-highlight">
-            <div class="container">
-                <div class="highlight-grid">
-                    <div class="highlight-card">
-                        <h3>24/7 Support</h3>
-                        <p>Real humans, rapid dispatch, remote diagnostics.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>Parts in Stock</h3>
-                        <p>Critical SKUs on-hand for legacy and modern cabinets.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>Experience Design</h3>
-                        <p>Lighting, sound, and flow tuned for revenue per sq ft.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="services-grid" id="services">
-            <div class="container">
-                <div class="services-container">
-                    <article class="service-card scroll-reveal" data-delay="0.1">
-                        <h2><a href="spare-parts/">Spare Parts</a></h2>
-                        <p>Comprehensive inventory of arcade machine components and replacement parts. Search by machine model, component type, or manufacturer.</p>
-                        <div class="service-features">
-                            <ul>
-                                <li>Extensive parts catalog</li>
-                                <li>Category filtering system</li>
-                                <li>Compatibility verification</li>
-                            </ul>
-                        </div>
-                        <a href="spare-parts/" class="btn-primary">Browse Parts</a>
-                    </article>
-
-                    <article class="service-card scroll-reveal" data-delay="0.2">
-                        <h2><a href="arcade-machine-service/">Arcade Machine Service</a></h2>
-                        <p>Professional maintenance, repair, and technical support for arcade equipment. Field service and on-site diagnostics available.</p>
-                        <div class="service-features">
-                            <ul>
-                                <li>Preventive maintenance programs</li>
-                                <li>Diagnostic services</li>
-                                <li>Emergency repair support</li>
-                            </ul>
-                        </div>
-                        <a href="arcade-machine-service/" class="btn-primary">View Services</a>
-                    </article>
-
-                    <article class="service-card scroll-reveal" data-delay="0.3">
-                        <h2><a href="cinema/">Cinema</a></h2>
-                        <p>Cinema equipment solutions including projection systems, audio installations, and facility management services.</p>
-                        <div class="service-features">
-                            <ul>
-                                <li>Equipment installation</li>
-                                <li>System integration</li>
-                                <li>Ongoing support</li>
-                            </ul>
-                        </div>
-                        <a href="cinema/" class="btn-primary">Learn More</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-card">
-                    <div class="brand-lockup">
-                        <img src="../Images/SMARTIco.png" alt="SMART Holding Business Fusion icon">
-                        <h3>SMART Holding Business Fusion</h3>
-                    </div>
-                    <p class="footer-tagline">Arcade ecosystems, cinema solutions, and service programs built to keep guests playing.</p>
-                    <span class="footer-pill">SMART Amusement World</span>
-                </div>
-                <div class="footer-card">
-                    <h4>Contact</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:SMART@smartbusinessfusion.com">Main: SMART@smartbusinessfusion.com</a></li>
-                        <li><a href="mailto:info@smartbusinessfusion.com">Info: info@smartbusinessfusion.com</a></li>
-                        <li><a href="mailto:arcade@smartbusinessfusion.com">Arcade: arcade@smartbusinessfusion.com</a></li>
-                    </ul>
-                </div>
-                <div class="footer-card">
-                    <h4>Explore</h4>
-                    <ul class="footer-links">
-                        <li><a href="../amusements/">SMART Amusement World</a></li>
-                        <li><a href="../academy/">SMART Educational Academy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> SMART Holding Business Fusion. All rights reserved.</p>
+        <div class="a-marquee-wrap" aria-hidden="true">
+            <div class="a-marquee-track">
+                <span>SPARE PARTS</span><span class="a-msep">·</span>
+                <span>ARCADE REPAIR</span><span class="a-msep">·</span>
+                <span>CINEMA SYSTEMS</span><span class="a-msep">·</span>
+                <span>ON-SITE SERVICE</span><span class="a-msep">·</span>
+                <span>EMERGENCY SUPPORT</span><span class="a-msep">·</span>
+                <span>SERVICE CONTRACTS</span><span class="a-msep">·</span>
+                <span>SPARE PARTS</span><span class="a-msep">·</span>
+                <span>ARCADE REPAIR</span><span class="a-msep">·</span>
+                <span>CINEMA SYSTEMS</span><span class="a-msep">·</span>
+                <span>ON-SITE SERVICE</span><span class="a-msep">·</span>
+                <span>EMERGENCY SUPPORT</span><span class="a-msep">·</span>
+                <span>SERVICE CONTRACTS</span><span class="a-msep">·</span>
             </div>
         </div>
+
+        <section class="a-services" id="services">
+            <div class="a-sec-header">
+                <span class="a-sec-label">01 — What We Do</span>
+                <div class="a-sec-rule"></div>
+            </div>
+            <div class="a-svc-list">
+                <article class="a-svc-row">
+                    <span class="a-svc-idx">01</span>
+                    <div class="a-svc-body">
+                        <h3><a href="spare-parts/">Spare Parts</a></h3>
+                        <p>Critical components for legacy and modern cabinets — sourced, stocked, and ready. No waiting weeks for parts that should already be there.</p>
+                        <div class="a-svc-pills">
+                            <span>Cabinet components</span><span>PCB &amp; electronics</span><span>Coin mechanisms</span><span>Monitors &amp; screens</span>
+                        </div>
+                    </div>
+                    <a href="spare-parts/" class="a-svc-link">Browse Parts <span class="a-svc-arr">→</span></a>
+                </article>
+                <article class="a-svc-row">
+                    <span class="a-svc-idx">02</span>
+                    <div class="a-svc-body">
+                        <h3><a href="arcade-machine-service/">Arcade Machine Service</a></h3>
+                        <p>Field maintenance, diagnostics, and emergency repair. We dispatch technicians to your venue and don't leave until the machine is running.</p>
+                        <div class="a-svc-pills">
+                            <span>Preventive maintenance</span><span>On-site diagnostics</span><span>Emergency repair</span><span>Service contracts</span>
+                        </div>
+                    </div>
+                    <a href="arcade-machine-service/" class="a-svc-link">View Services <span class="a-svc-arr">→</span></a>
+                </article>
+                <article class="a-svc-row">
+                    <span class="a-svc-idx">03</span>
+                    <div class="a-svc-body">
+                        <h3><a href="cinema/">Cinema Equipment</a></h3>
+                        <p>Projection systems, audio installations, and full facility integration for cinema operators. From single-screen independents to multi-hall venues.</p>
+                        <div class="a-svc-pills">
+                            <span>Projection systems</span><span>Audio installation</span><span>System integration</span><span>Ongoing support</span>
+                        </div>
+                    </div>
+                    <a href="cinema/" class="a-svc-link">Learn More <span class="a-svc-arr">→</span></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="a-promise">
+            <div class="a-sec-header">
+                <span class="a-sec-label">02 — How We Work</span>
+                <div class="a-sec-rule"></div>
+            </div>
+            <div class="a-promise-grid">
+                <div class="a-promise-item">
+                    <h3>One <span>call.</span></h3>
+                    <p>Single point of contact for all your equipment needs — parts, repair, or a full service contract. No bouncing between departments.</p>
+                </div>
+                <div class="a-promise-item">
+                    <h3>Fast <span>dispatch.</span></h3>
+                    <p>On-site technicians within 24 hours for service calls. Remote diagnostics available before we roll a truck.</p>
+                </div>
+                <div class="a-promise-item">
+                    <h3>Parts <span>ready.</span></h3>
+                    <p>Core SKUs for legacy and modern cabinets held locally — your machines don't wait on international freight.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="a-contact" id="contact">
+            <div class="a-contact-header">
+                <h2>Ready to work<br><em>together?</em></h2>
+                <p>Tell us what you're dealing with and we'll respond within one business day. No sales pitch — just a straight answer.</p>
+            </div>
+            <div class="a-contact-grid">
+                <div class="a-contact-info">
+                    <div class="a-contact-item">
+                        <span class="a-ci-label">Email</span>
+                        <a href="mailto:arcade@smartbusinessfusion.com">arcade@smartbusinessfusion.com</a>
+                    </div>
+                    <div class="a-contact-item">
+                        <span class="a-ci-label">Phone / WhatsApp</span>
+                        <a href="tel:+94773689366">+94 77 368 9366</a>
+                    </div>
+                    <div class="a-contact-item">
+                        <span class="a-ci-label">Response time</span>
+                        <span>Within one business day</span>
+                    </div>
+                </div>
+                <form id="amusements-contact-form" class="a-form" novalidate>
+                    <div class="a-form-row">
+                        <div class="a-form-group">
+                            <label for="cf-name">Your Name</label>
+                            <input type="text" id="cf-name" name="from_name" placeholder="John Smith" required>
+                        </div>
+                        <div class="a-form-group">
+                            <label for="cf-company">Company / Venue</label>
+                            <input type="text" id="cf-company" name="company" placeholder="Fun Zone Ltd." required>
+                        </div>
+                    </div>
+                    <div class="a-form-row">
+                        <div class="a-form-group">
+                            <label for="cf-email">Email</label>
+                            <input type="email" id="cf-email" name="reply_to" placeholder="you@company.com" required>
+                        </div>
+                        <div class="a-form-group">
+                            <label for="cf-phone">Phone / WhatsApp</label>
+                            <input type="tel" id="cf-phone" name="phone" placeholder="+94 77 000 0000">
+                        </div>
+                    </div>
+                    <div class="a-form-group">
+                        <label for="cf-service">Service Needed</label>
+                        <select id="cf-service" name="service_type" required>
+                            <option value="" disabled selected>Select a service…</option>
+                            <option>Spare Parts Supply</option>
+                            <option>Arcade Machine Repair</option>
+                            <option>Preventive Maintenance</option>
+                            <option>Cinema Equipment</option>
+                            <option>Service Contract</option>
+                            <option>Other / Not Sure</option>
+                        </select>
+                    </div>
+                    <div class="a-form-group">
+                        <label for="cf-message">Tell us more</label>
+                        <textarea id="cf-message" name="message" placeholder="Machine model, fault description, number of units, timeline — any detail helps us respond faster."></textarea>
+                    </div>
+                    <div id="cf-status" class="a-form-status"></div>
+                    <button type="submit" id="cf-submit" class="a-form-submit">Send Message →</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="a-footer">
+        <div class="a-footer-inner">
+            <div class="a-footer-left">
+                <span class="a-footer-logo">SMART AMU</span>
+                <span class="a-footer-copy">&copy; <span id="currentYear"></span> SMART Holding Business Fusion</span>
+            </div>
+            <nav class="a-footer-nav">
+                <a href="../">Holdings</a>
+                <a href="../academy/">Academy</a>
+                <a href="mailto:arcade@smartbusinessfusion.com">arcade@smartbusinessfusion.com</a>
+            </nav>
+        </div>
     </footer>
-       <div class="dev-watermark">
-           <button class="dev-badge" type="button" aria-label="Developer watermark">
-               <span class="dev-logo" aria-hidden="true"></span>
-               <span class="dev-text">Made with <span class="dev-heart">❤️</span> by <strong>Nawaf Mohammed Ashraff</strong></span>
-           </button>
-       </div>
     </div>
 
-    <script src="../js/main.js"></script>
+    <div class="dev-watermark">
+        <button class="dev-badge" type="button" aria-label="Developer watermark">
+            <span class="dev-logo" aria-hidden="true"></span>
+            <span class="dev-text">Made with <span class="dev-heart">❤️</span> by <strong>Nawaf Mohammed Ashraff</strong></span>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="../js/loading.js"></script>
-    <script src="../js/custom-scroll.js"></script>
     <script src="../js/3d-background.js"></script>
     <script src="../js/cursor.js"></script>
-    <script src="../js/scroll-animations.js"></script>
-    <script src="../js/premium-animations.js"></script>
+    <script src="../js/contact-form.js"></script>
     <script src="../js/security.js"></script>
+    <script>
+    (function () {
+        var y = document.getElementById('currentYear');
+        if (y) y.textContent = new Date().getFullYear();
+        var nav = document.getElementById('a-nav');
+        if (nav) window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+        var track = document.querySelector('.a-marquee-track');
+        if (track && window.gsap) gsap.to(track, { x: '-50%', duration: 18, ease: 'none', repeat: -1 });
+        if (window.gsap) {
+            var tl = gsap.timeline({ delay: 0.3 });
+            tl.from('.a-hero-tag',     { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' })
+              .from('.a-hl',           { y: 90, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, '-=0.2')
+              .from('.a-hero-body',    { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+              .from('.a-hero-actions', { y: 15, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15');
+        }
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+            document.querySelectorAll('.a-svc-row').forEach(function (row, i) {
+                gsap.from(row, { scrollTrigger: { trigger: row, start: 'top 85%' }, y: 30, opacity: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.1 });
+            });
+            document.querySelectorAll('.a-promise-item').forEach(function (item, i) {
+                gsap.from(item, { scrollTrigger: { trigger: '.a-promise', start: 'top 75%' }, y: 30, opacity: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.12 });
+            });
+            gsap.from('.a-contact-header h2', { scrollTrigger: { trigger: '.a-contact', start: 'top 75%' }, y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' });
+        }
+        document.querySelectorAll('.a-svc-row').forEach(function (row) {
+            var link = row.querySelector('.a-svc-link');
+            var arr  = row.querySelector('.a-svc-arr');
+            row.addEventListener('mouseenter', function () {
+                if (window.gsap) { gsap.to(link, { color: '#F07820', duration: 0.2 }); gsap.to(arr, { x: 5, duration: 0.2 }); }
+            });
+            row.addEventListener('mouseleave', function () {
+                if (window.gsap) { gsap.to(link, { color: 'rgba(232,232,240,0.45)', duration: 0.2 }); gsap.to(arr, { x: 0, duration: 0.2 }); }
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
-
