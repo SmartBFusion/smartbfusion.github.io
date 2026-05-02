@@ -1,0 +1,14 @@
+# Build artifacts & archives
+*.zip
+*.rar
+*.tar.gz
+
+# Cloudflare / admin panels (deployed separately — not via GitHub Pages)
+worker/
+admin/
+amusements/admin/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
