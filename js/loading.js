@@ -18,7 +18,7 @@
     function checkIfAlreadyLoaded() {
         const gsapLoaded = typeof gsap !== 'undefined';
         const threeLoaded = typeof THREE !== 'undefined';
-        const fontsLoaded = document.fonts ? document.fonts.check('1em Inter') : true; // Fallback to true if API not available
+        const fontsLoaded = document.fonts ? document.fonts.check('1em sans-serif') : true; // Fallback to true if API not available
         const domReady = document.readyState !== 'loading';
         
         // Check images

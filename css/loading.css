@@ -1,3 +1,13 @@
+/* Shared variable fallbacks — these are overridden by each page's CSS */
+:root {
+    --color-bg-dark:      #080810;
+    --color-text-inverse: #ffffff;
+    --color-accent:       #4a9eff;
+    --color-primary:      #2aafa0;
+    --font-heading:       system-ui, sans-serif;
+    --font-mono:          'Courier New', monospace;
+}
+
 /* Premium Loading Screen - Cinematic Experience */
 .loading-screen {
     position: fixed;

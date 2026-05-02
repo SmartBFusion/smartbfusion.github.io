@@ -1,3 +1,9 @@
+/* Shared variable fallbacks */
+:root {
+    --color-accent:  #4a9eff;
+    --color-primary: #2aafa0;
+}
+
 /* Global custom cursor (triangle) */
 body:not(.kids-page),
 body:not(.kids-page) a,
