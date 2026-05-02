@@ -1,0 +1,13 @@
+# Build artifacts & archives
+*.zip
+*.rar
+*.tar.gz
+
+# Cloudflare (deployed separately — not via GitHub Pages)
+worker/
+admin/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

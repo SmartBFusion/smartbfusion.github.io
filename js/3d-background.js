@@ -17,7 +17,7 @@
 
         // Scene setup
         scene = new THREE.Scene();
-        scene.fog = new THREE.Fog(0x1a1a1a, 1, 2000);
+        scene.fog = new THREE.Fog(0x0d1b2e, 1, 2000);
 
         // Camera setup
         camera = new THREE.PerspectiveCamera(
@@ -53,11 +53,14 @@
             positions[i3 + 1] = (Math.random() - 0.5) * 2000;
             positions[i3 + 2] = (Math.random() - 0.5) * 2000;
 
-            // Color - mix of accent and primary
-            if (Math.random() > 0.7) {
-                color.setHex(0x205587); // Accent color (updated)
+            // Color - bright teal/blue palette for dark backgrounds
+            const roll = Math.random();
+            if (roll > 0.65) {
+                color.setHex(0x4a9eff); // bright blue
+            } else if (roll > 0.35) {
+                color.setHex(0x2aafa0); // teal
             } else {
-                color.setHex(0x1a1a1a); // Primary color
+                color.setHex(0x1B4B8A); // brand navy (subtler)
             }
 
             colors[i3] = color.r;
@@ -96,10 +99,10 @@
             }
 
             const material = new THREE.MeshBasicMaterial({
-                color: Math.random() > 0.5 ? 0x205587 : 0x1a1a1a,
+                color: Math.random() > 0.5 ? 0x1B4B8A : 0x2aafa0,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.2
+                opacity: 0.18
             });
 
             const mesh = new THREE.Mesh(geometry, material);
