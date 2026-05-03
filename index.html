@@ -40,19 +40,24 @@
     <main>
 
         <section class="h-hero">
-            <div class="h-hero-top">
-                <img src="Images/SMARTMainTransparentwhite.png" alt="SMART Holding Business Fusion" class="h-hero-logo">
-                <p class="h-eyebrow">/ Est. Saudi Arabia</p>
+            <div class="h-hero-inner">
+                <div class="h-col-rule" aria-hidden="true"></div>
+                <div class="h-hero-content">
+                    <p class="h-eyebrow">/ Saudi Arabia · Est. 2024</p>
+                    <h1 class="h-headline">
+                        Building Saudi Arabia's<br>
+                        entertainment and<br>
+                        education<br>
+                        infrastructure.
+                    </h1>
+                    <div class="h-hero-chips">
+                        <span class="h-chip">Arcade Systems</span>
+                        <span class="h-chip">Early Education</span>
+                        <span class="h-chip">Built in KSA</span>
+                    </div>
+                </div>
             </div>
-            <div class="h-hero-void"></div>
-            <div class="h-hero-bottom">
-                <h1 class="h-display">
-                    <span class="h-d-line">HOLDING BUSINESS</span>
-                    <span class="h-d-line">FUSION</span>
-                </h1>
-                <p class="h-hero-tag">Arcade Systems ◆ Early Education ◆ Built in Saudi Arabia</p>
-            </div>
-            <a href="#portfolio" class="h-scroll-cue" aria-label="Scroll down">
+            <a href="#divisions" class="h-scroll-cue" aria-label="Scroll down">
                 <span class="h-scroll-line"></span>
                 <span>Scroll</span>
             </a>
@@ -70,52 +75,27 @@
             </div>
         </section>
 
-        <section class="h-portfolio" id="portfolio">
-            <div class="h-port-header">
-                <span class="h-port-label">01 — Our Portfolio</span>
-                <div class="h-port-rule"></div>
+        <section class="h-divisions" id="divisions">
+            <div class="h-div-header">
+                <span class="h-div-annotation">/ 02</span>
+                <span class="h-div-label">—— Our Divisions</span>
+                <div class="h-div-rule"></div>
             </div>
-            <div class="h-port-list">
-                <article class="h-port-row" data-division="amusements">
-                    <span class="h-port-idx">01</span>
-                    <div class="h-port-info">
-                        <h3 class="h-port-name">SMART Amusement World</h3>
-                        <p class="h-port-tag">Arcade systems · Cinema · Spare parts · Field service</p>
-                    </div>
-                    <a href="amusements/" class="h-port-link">Explore <span class="h-port-arrow">→</span></a>
-                </article>
-                <article class="h-port-row" data-division="academy">
-                    <span class="h-port-idx">02</span>
-                    <div class="h-port-info">
-                        <h3 class="h-port-name">SMART Educational Academy</h3>
-                        <p class="h-port-tag">Kids preschool · Spoken English · Sainthamaruthu, Sri Lanka</p>
-                    </div>
-                    <a href="academy/" class="h-port-link">Explore <span class="h-port-arrow">→</span></a>
-                </article>
-                <article class="h-port-row h-port-placeholder" data-division="division1">
-                    <span class="h-port-idx">03</span>
-                    <div class="h-port-info">
-                        <h3 class="h-port-name">In Development</h3>
-                        <p class="h-port-tag">Expanding our portfolio</p>
-                    </div>
-                    <span class="h-port-status">Soon</span>
-                </article>
-                <article class="h-port-row h-port-placeholder" data-division="division2">
-                    <span class="h-port-idx">04</span>
-                    <div class="h-port-info">
-                        <h3 class="h-port-name">In Development</h3>
-                        <p class="h-port-tag">Expanding our portfolio</p>
-                    </div>
-                    <span class="h-port-status">Soon</span>
-                </article>
-                <article class="h-port-row h-port-placeholder" data-division="division3">
-                    <span class="h-port-idx">05</span>
-                    <div class="h-port-info">
-                        <h3 class="h-port-name">In Development</h3>
-                        <p class="h-port-tag">Expanding our portfolio</p>
-                    </div>
-                    <span class="h-port-status">Soon</span>
-                </article>
+            <div class="h-div-grid">
+                <a href="amusements/" class="h-div-card">
+                    <img src="Images/AMUIco.png" alt="" class="h-div-icon" aria-hidden="true">
+                    <h3 class="h-div-name">SMART<br>Amusement World</h3>
+                    <div class="h-div-sep"></div>
+                    <p class="h-div-desc">Arcade machines, cinema equipment and spare parts. Full field service and support.</p>
+                    <span class="h-div-enter">Enter <span class="h-div-arrow">→</span></span>
+                </a>
+                <a href="academy/" class="h-div-card">
+                    <img src="Images/EDUIco.png" alt="" class="h-div-icon" aria-hidden="true">
+                    <h3 class="h-div-name">SMART<br>Academy</h3>
+                    <div class="h-div-sep"></div>
+                    <p class="h-div-desc">Early education for children and adults. Built for Saudi Arabia.</p>
+                    <span class="h-div-enter">Enter <span class="h-div-arrow">→</span></span>
+                </a>
             </div>
         </section>
 
@@ -165,18 +145,15 @@
         if (nav) window.addEventListener('scroll', function () {
             nav.classList.toggle('scrolled', window.scrollY > 60);
         }, { passive: true });
-        var track = document.querySelector('.h-marquee-track');
-        if (track && window.gsap) gsap.to(track, { x: '-50%', duration: 22, ease: 'none', repeat: -1 });
         // Hero animation fires only after loader is fully dismissed (body.loaded)
         // Elements are NOT pre-hidden in CSS — they are visible as fallback
         function runHeroAnim() {
             if (!window.gsap) return;
             var tl = gsap.timeline();
-            // Animate only Y transform — elements always visible, no opacity flash possible
-            tl.from('.h-hero-logo',  { y: 20, duration: 0.7, ease: 'power2.out' })
-              .from('.h-eyebrow',    { y: 14, duration: 0.5, ease: 'power2.out' }, '-=0.35')
-              .from('.h-d-line',     { y: 40, duration: 0.9, ease: 'power3.out', stagger: 0.1 }, '-=0.15')
-              .from('.h-hero-tag',   { y: 12, duration: 0.4, ease: 'power2.out' }, '-=0.35')
+            tl.from('.h-col-rule',   { scaleY: 0, duration: 0.7, ease: 'power2.out', transformOrigin: 'top center' })
+              .from('.h-eyebrow',    { y: 14, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+              .from('.h-headline',   { y: 30, duration: 0.9, ease: 'power3.out' }, '-=0.35')
+              .from('.h-hero-chips', { y: 12, duration: 0.45, ease: 'power2.out' }, '-=0.35')
               .from('.h-scroll-cue', { y: 8,  duration: 0.4, ease: 'power2.out' }, '-=0.2');
         }
         if (document.body.classList.contains('loaded')) {
@@ -191,29 +168,12 @@
             gsap.registerPlugin(ScrollTrigger);
             gsap.from('.h-manifesto-text', { scrollTrigger: { trigger: '.h-manifesto', start: 'top 75%' }, y: 50, opacity: 0, duration: 1, ease: 'power3.out' });
             gsap.from('.h-manifesto-body', { scrollTrigger: { trigger: '.h-manifesto', start: 'top 65%' }, y: 25, opacity: 0, duration: 0.7, ease: 'power2.out', delay: 0.25 });
-            document.querySelectorAll('.h-port-row').forEach(function (row, i) {
-                gsap.from(row, { scrollTrigger: { trigger: row, start: 'top 88%' }, x: -25, opacity: 0, duration: 0.55, ease: 'power2.out', delay: i * 0.06 });
+            document.querySelectorAll('.h-div-card').forEach(function (card, i) {
+                gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 88%' }, y: 25, opacity: 0, duration: 0.55, ease: 'power2.out', delay: i * 0.1 });
             });
             gsap.from('.h-cta-email', { scrollTrigger: { trigger: '.h-cta', start: 'top 75%' }, y: 35, opacity: 0, duration: 0.9, ease: 'power3.out' });
         }
-        document.querySelectorAll('.h-port-row:not(.h-port-placeholder)').forEach(function (row) {
-            var link = row.querySelector('.h-port-link');
-            var name = row.querySelector('.h-port-name');
-            var arr  = row.querySelector('.h-port-arrow');
-            row.addEventListener('mouseenter', function () {
-                if (window.gsap) {
-                    gsap.to([link, name], { color: '#C9963A', duration: 0.22 });
-                    gsap.to(arr, { x: 6, duration: 0.22 });
-                }
-            });
-            row.addEventListener('mouseleave', function () {
-                if (window.gsap) {
-                    gsap.to(link, { color: 'rgba(240,236,227,0.45)', duration: 0.22 });
-                    gsap.to(name, { color: '#F0ECE3', duration: 0.22 });
-                    gsap.to(arr,  { x: 0, duration: 0.22 });
-                }
-            });
-        });
+        // Division card hover is handled by CSS :hover selectors
     })();
     </script>
 </body>
