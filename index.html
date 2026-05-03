@@ -21,7 +21,7 @@
 <body class="no-select holdings-page">
     <div id="loading-screen" class="loading-screen">
         <div class="loading-content">
-            <div class="loading-logo">SMART</div>
+            <div class="loading-logo"><img src="Images/SMARTIco.png" alt="" class="h-loading-icon"></div>
             <div class="loading-progress"><div class="loading-progress-bar"></div></div>
             <div class="loading-text">Loading</div>
         </div>
@@ -34,11 +34,8 @@
 
     <nav class="h-nav" id="h-nav">
         <div class="h-nav-inner">
-            <div class="h-nav-brand">
-                <span class="h-nav-logo">SMART</span>
-                <span class="h-nav-sub">Business Holding</span>
-            </div>
-            <a href="mailto:SMART@smartbusinessfusion.com" class="h-nav-cta">Connect ↗</a>
+            <img src="Images/SMARTMainTransparentwhite.png" alt="SMART Holdings" class="h-nav-logo-img">
+            <a href="mailto:SMART@smartbusinessfusion.com" id="h-nav-email" class="h-nav-cta">Connect ↗</a>
         </div>
     </nav>
 
@@ -48,12 +45,12 @@
         <section class="h-hero">
             <div class="h-hero-inner">
                 <p class="h-eyebrow">Est. Saudi Arabia</p>
+                <img src="Images/SMARTMainTransparentwhite.png" alt="SMART Holding Business Fusion" class="h-hero-logo">
+                <div class="h-hero-rule"></div>
+                <p class="h-hero-tag">Arcade Systems ◆ Early Education ◆ Built in Saudi Arabia</p>
                 <h1 class="h-display">
-                    <span class="h-d-line">SMART</span>
                     <span class="h-d-sub">Holding Business Fusion</span>
                 </h1>
-                <div class="h-hero-rule"></div>
-                <p class="h-hero-tag">Engineering · Education · Growth</p>
             </div>
             <a href="#portfolio" class="h-scroll-cue" aria-label="Scroll down">
                 <span class="h-scroll-line"></span>
@@ -156,7 +153,7 @@
     <footer class="h-footer">
         <div class="h-footer-inner">
             <div class="h-footer-left">
-                <span class="h-footer-logo">SMART</span>
+                <img src="Images/SMARTMainTransparentwhite.png" alt="SMART" class="h-footer-logo-img">
                 <span class="h-footer-copy">&copy; <span id="currentYear"></span> SMART Holding Business Fusion. All rights reserved.</span>
             </div>
             <nav class="h-footer-nav">
@@ -189,14 +186,25 @@
         }, { passive: true });
         var track = document.querySelector('.h-marquee-track');
         if (track && window.gsap) gsap.to(track, { x: '-50%', duration: 22, ease: 'none', repeat: -1 });
-        if (window.gsap) {
-            var tl = gsap.timeline({ delay: 0.3 });
-            tl.from('.h-eyebrow',   { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' })
-              .from('.h-d-line',    { y: 80, opacity: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3')
-              .from('.h-d-sub',     { y: 30, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-              .from('.h-hero-rule', { scaleX: 0, duration: 0.5, ease: 'power2.out', transformOrigin: 'left' }, '-=0.2')
-              .from('.h-hero-tag',  { y: 15, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
-              .from('.h-scroll-cue',{ opacity: 0, duration: 0.5 }, '-=0.1');
+        // Hero animation fires only after loader is fully dismissed (body.loaded)
+        // Elements are NOT pre-hidden in CSS — they are visible as fallback
+        function runHeroAnim() {
+            if (!window.gsap) return;
+            var tl = gsap.timeline();
+            tl.from('.h-eyebrow',    { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' })
+              .from('.h-hero-logo',  { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
+              .from('.h-hero-rule',  { scaleX: 0, duration: 0.5, ease: 'power2.out', transformOrigin: 'left' }, '-=0.2')
+              .from('.h-hero-tag',   { y: 15, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
+              .from('.h-d-sub',      { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
+              .from('.h-scroll-cue', { opacity: 0, duration: 0.5 }, '-=0.1');
+        }
+        if (document.body.classList.contains('loaded')) {
+            runHeroAnim();
+        } else {
+            var _mo = new MutationObserver(function() {
+                if (document.body.classList.contains('loaded')) { _mo.disconnect(); runHeroAnim(); }
+            });
+            _mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
         }
         if (window.gsap && window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);

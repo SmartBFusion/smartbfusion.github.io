@@ -118,3 +118,67 @@
     .h-footer-inner { flex-direction:column; align-items:flex-start; }
     .h-d-sub { font-size:clamp(.8rem,5vw,1.2rem); }
 }
+
+/* ── v3 additions ───────────────────────────────────────────────────────────  */
+
+/* Loading: icon instead of text */
+.holdings-page .loading-logo {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    font-size: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+.h-loading-icon {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    /* inherits opacity:0 + translateY(30px) from .loading-logo in loading.css */
+}
+
+/* Nav logo image */
+.h-nav-logo-img { height: 38px; width: auto; display: block; }
+
+/* Hero grid lines */
+.h-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(201,150,58,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,150,58,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Hero logo image */
+.h-hero-logo {
+    width: 320px;
+    max-width: 75vw;
+    height: auto;
+    display: block;
+    margin-bottom: 2.25rem;
+}
+
+/* Portfolio: gold left border on active rows */
+.h-port-row:not(.h-port-placeholder) {
+    border-left: 3px solid var(--h-gold);
+    padding-left: 1.75rem;
+}
+/* Portfolio: dashed left border on placeholder rows (row opacity handles the fade) */
+.h-port-placeholder {
+    border-left: 3px dashed var(--h-gold);
+    padding-left: 1.75rem;
+}
+
+/* Footer logo image */
+.h-footer-logo-img { height: 26px; width: auto; opacity: 0.65; display: block; }
+
+@media (max-width:560px) {
+    .h-hero-logo { width: 220px; }
+}
