@@ -15,7 +15,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--color-bg-dark) 0%, #0f0f0f 100%);
+    background: transparent;
     z-index: 10000;
     display: flex;
     flex-direction: column;
@@ -36,9 +36,6 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, 
-        rgba(32, 85, 135, 0.1) 0%, 
-        transparent 70%);
     animation: loadingRotate 20s linear infinite;
 }
 
@@ -60,7 +57,6 @@
 
 .loading-content {
     text-align: center;
-    color: var(--color-text-inverse);
     position: relative;
     z-index: 1;
 }
@@ -73,12 +69,6 @@
     letter-spacing: -0.05em;
     opacity: 0;
     transform: translateY(30px);
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(255, 255, 255, 0.8) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     position: relative;
 }
 
@@ -90,17 +80,11 @@
     transform: translateX(-50%);
     width: 100px;
     height: 2px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        var(--color-accent) 50%, 
-        transparent 100%);
-    opacity: 0.6;
 }
 
 .loading-progress {
     width: 280px;
     height: 3px;
-    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 3px;
     overflow: hidden;
     margin: 0 auto;
@@ -115,10 +99,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.2) 50%, 
-        transparent 100%);
     animation: loadingShimmer 2s ease-in-out infinite;
 }
 
@@ -134,19 +114,13 @@
 .loading-progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, 
-        var(--color-accent) 0%, 
-        rgba(32, 85, 135, 0.9) 50%,
-        var(--color-accent) 100%);
     border-radius: 3px;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    box-shadow: 0 0 20px rgba(32, 85, 135, 0.5);
 }
 
 .loading-text {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
     margin-top: 2rem;
     font-weight: 400;
     letter-spacing: 0.15em;
@@ -155,3 +129,36 @@
     font-family: var(--font-mono);
 }
 
+/* ── Dark theme: scoped to .holdings-page only ─────────────────────────── */
+.holdings-page .loading-screen {
+    background: linear-gradient(135deg, var(--color-bg-dark) 0%, #0f0f0f 100%);
+}
+.holdings-page .loading-screen::before {
+    background: radial-gradient(circle, rgba(32, 85, 135, 0.1) 0%, transparent 70%);
+}
+.holdings-page .loading-content {
+    color: var(--color-text-inverse);
+}
+.holdings-page .loading-logo {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.holdings-page .loading-logo::after {
+    background: linear-gradient(90deg, transparent 0%, var(--color-accent) 50%, transparent 100%);
+    opacity: 0.6;
+}
+.holdings-page .loading-progress {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.holdings-page .loading-progress::before {
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+}
+.holdings-page .loading-progress-bar {
+    background: linear-gradient(90deg, var(--color-accent) 0%, rgba(32, 85, 135, 0.9) 50%, var(--color-accent) 100%);
+    box-shadow: 0 0 20px rgba(32, 85, 135, 0.5);
+}
+.holdings-page .loading-text {
+    color: rgba(255, 255, 255, 0.5);
+}

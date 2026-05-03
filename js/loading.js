@@ -225,12 +225,12 @@
         setTimeout(animateLoader, 100);
     }
 
-    // Fallback timeout - hide loader after max 5 seconds
+    // Fallback timeout - hide loader after max 2 seconds
     setTimeout(() => {
         if (loader && !loader.classList.contains('hidden')) {
             console.warn('Loading timeout - forcing hide');
             hideLoader();
         }
-    }, 5000);
+    }, 2000);
 
 })();
