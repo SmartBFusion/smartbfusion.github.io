@@ -41,13 +41,13 @@
 .h-nav-cta:hover { background:var(--h-gold); color:var(--h-bg); }
 
 /* ── Hero ──────────────────────────────────────────────────────────────────  */
-.h-hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 3rem 7rem; overflow:hidden; }
+.h-hero { position:relative; min-height:100vh; display:grid; place-items:center; padding:80px 3rem 3rem; overflow:visible; }
 .h-hero::after { content:''; position:absolute; inset:0; opacity:.025; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events:none; z-index:1; }
-.h-hero-inner { position:relative; z-index:2; }
+.h-hero-inner { position:relative; z-index:2; width:100%; padding:0 0 2rem; }
 .h-eyebrow { font-size:.65rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; color:var(--h-gold); margin-bottom:1.75rem; }
 .h-display { font-family:var(--h-fd); font-weight:800; line-height:.9; letter-spacing:-.03em; margin:0 0 2.25rem; }
 .h-d-line  { display:block; color:var(--h-text); font-size:clamp(5.5rem,17vw,18rem); }
-.h-d-sub   { display:block; font-size:clamp(1rem,3.2vw,3.2rem); font-weight:700; color:transparent; -webkit-text-stroke:1px rgba(201,150,58,.7); letter-spacing:.12em; margin-top:.5rem; }
+.h-d-sub   { display:block; font-size:clamp(1rem,3.2vw,3.2rem); font-weight:700; color:transparent; -webkit-text-stroke:1px rgba(201,150,58,.7); letter-spacing:.12em; margin-top:.5rem; padding-bottom:0.15em; }
 .h-hero-rule { width:4.5rem; height:1px; background:var(--h-gold); margin-bottom:1.3rem; }
 .h-hero-tag  { font-size:.75rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--h-muted); }
 .h-scroll-cue { position:absolute; bottom:3.5rem; right:3rem; display:flex; flex-direction:column; align-items:center; gap:.8rem; text-decoration:none; color:var(--h-muted); font-size:.58rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
@@ -149,8 +149,8 @@
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(201,150,58,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,150,58,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(201,150,58,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,150,58,0.08) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
