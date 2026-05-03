@@ -145,14 +145,13 @@
         if (nav) window.addEventListener('scroll', function () {
             nav.classList.toggle('scrolled', window.scrollY > 60);
         }, { passive: true });
-        // Hero animation fires only after loader is fully dismissed (body.loaded)
-        // Elements are NOT pre-hidden in CSS — they are visible as fallback
         function runHeroAnim() {
             if (!window.gsap) return;
             var tl = gsap.timeline();
-            tl.from('.h-col-rule',   { scaleY: 0, duration: 0.7, ease: 'power2.out', transformOrigin: 'top center' })
-              .from('.h-eyebrow',    { y: 14, duration: 0.5, ease: 'power2.out' }, '-=0.3')
-              .from('.h-headline',   { y: 30, duration: 0.9, ease: 'power3.out' }, '-=0.35')
+            // .h-col-rule is NOT animated — scaleY:0 would leave it invisible if
+            // the timeline stalls. It renders statically at full height via flex stretch.
+            tl.from('.h-eyebrow',    { y: 14, duration: 0.5, ease: 'power2.out' })
+              .from('.h-headline',   { y: 30, duration: 0.9, ease: 'power3.out' }, '-=0.2')
               .from('.h-hero-chips', { y: 12, duration: 0.45, ease: 'power2.out' }, '-=0.35')
               .from('.h-scroll-cue', { y: 8,  duration: 0.4, ease: 'power2.out' }, '-=0.2');
         }

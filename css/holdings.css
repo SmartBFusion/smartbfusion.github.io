@@ -107,7 +107,7 @@
 .h-div-label { font-family:var(--h-fd); font-size:.6rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--h-gold); white-space:nowrap; }
 .h-div-rule { flex:1; height:1px; background:var(--h-border); }
 .h-div-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
-.h-div-card { position:relative; display:flex; flex-direction:column; padding:2.5rem; min-height:280px; background:var(--h-surf); border:1px solid var(--h-border); border-left:4px solid rgba(201,150,58,.4); text-decoration:none; transition:background .25s, border-left-color .25s; }
+.h-div-card { position:relative; display:flex; flex-direction:column; padding:2.5rem; min-height:300px; background:var(--h-surf); border:1px solid var(--h-border); border-left:4px solid rgba(201,150,58,.4); text-decoration:none; transition:background .25s, border-left-color .25s; }
 .h-div-card:hover { background:rgba(201,150,58,.04); border-left-color:var(--h-gold); }
 .h-div-icon { width:64px; height:64px; object-fit:contain; margin-bottom:2rem; transition:transform .25s ease; }
 .h-div-card:hover .h-div-icon { transform:translateY(-4px); }

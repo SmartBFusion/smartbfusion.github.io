@@ -5,19 +5,25 @@ html {
     scrollbar-color: rgba(201,150,58,0.6) rgba(255,255,255,0.05);
 }
 
-::-webkit-scrollbar {
+/* body becomes the scroll container when overflow-x:hidden is set on it
+   (CSS spec: overflow-y is forced to auto when overflow-x is non-visible) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
     width: 6px;
 }
 
-::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
     background: rgba(255,255,255,0.03);
 }
 
-::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
     background: rgba(201,150,58,0.6);
     border-radius: 3px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
     background: rgba(201,150,58,0.9);
 }
