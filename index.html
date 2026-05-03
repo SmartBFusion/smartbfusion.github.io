@@ -40,14 +40,17 @@
     <main>
 
         <section class="h-hero">
-            <div class="h-hero-inner">
-                <p class="h-eyebrow">Est. Saudi Arabia</p>
+            <div class="h-hero-top">
                 <img src="Images/SMARTMainTransparentwhite.png" alt="SMART Holding Business Fusion" class="h-hero-logo">
-                <div class="h-hero-rule"></div>
-                <p class="h-hero-tag">Arcade Systems ◆ Early Education ◆ Built in Saudi Arabia</p>
+                <p class="h-eyebrow">/ Est. Saudi Arabia</p>
+            </div>
+            <div class="h-hero-void"></div>
+            <div class="h-hero-bottom">
                 <h1 class="h-display">
-                    <span class="h-d-sub">Holding Business Fusion</span>
+                    <span class="h-d-line">HOLDING BUSINESS</span>
+                    <span class="h-d-line">FUSION</span>
                 </h1>
+                <p class="h-hero-tag">Arcade Systems ◆ Early Education ◆ Built in Saudi Arabia</p>
             </div>
             <a href="#portfolio" class="h-scroll-cue" aria-label="Scroll down">
                 <span class="h-scroll-line"></span>
@@ -188,12 +191,12 @@
         function runHeroAnim() {
             if (!window.gsap) return;
             var tl = gsap.timeline();
-            tl.from('.h-eyebrow',    { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' })
-              .from('.h-hero-logo',  { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-              .from('.h-hero-rule',  { scaleX: 0, duration: 0.5, ease: 'power2.out', transformOrigin: 'left' }, '-=0.2')
-              .from('.h-hero-tag',   { y: 15, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
-              .from('.h-d-sub',      { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
-              .from('.h-scroll-cue', { opacity: 0, duration: 0.5 }, '-=0.1');
+            // Animate only Y transform — elements always visible, no opacity flash possible
+            tl.from('.h-hero-logo',  { y: 20, duration: 0.7, ease: 'power2.out' })
+              .from('.h-eyebrow',    { y: 14, duration: 0.5, ease: 'power2.out' }, '-=0.35')
+              .from('.h-d-line',     { y: 40, duration: 0.9, ease: 'power3.out', stagger: 0.1 }, '-=0.15')
+              .from('.h-hero-tag',   { y: 12, duration: 0.4, ease: 'power2.out' }, '-=0.35')
+              .from('.h-scroll-cue', { y: 8,  duration: 0.4, ease: 'power2.out' }, '-=0.2');
         }
         if (document.body.classList.contains('loaded')) {
             runHeroAnim();
