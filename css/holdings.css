@@ -43,8 +43,8 @@
 /* ── Hero — Declaration ─────────────────────────────────────────────────────  */
 .h-hero { position:relative; min-height:100vh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; padding:120px 5rem 6rem; }
 .h-hero::after { content:''; position:absolute; inset:0; opacity:.025; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); pointer-events:none; z-index:1; }
-.h-hero-inner { position:relative; z-index:2; display:flex; flex-direction:row; align-items:stretch; max-width:58vw; }
-.h-col-rule { width:2px; background:var(--h-gold); flex-shrink:0; margin-right:2.25rem; transform-origin:top center; }
+.h-hero-inner { position:relative; z-index:2; display:flex; flex-direction:row; align-items:stretch; gap:2.5rem; max-width:58vw; }
+.h-col-rule { width:2px; background:rgba(201,150,58,0.85); min-height:200px; flex-shrink:0; transform-origin:top center; }
 .h-hero-content { flex:1; }
 .h-eyebrow { font-size:.6rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; color:var(--h-gold); margin-bottom:2rem; }
 .h-headline { font-family:var(--h-fd); font-weight:800; font-size:clamp(2.8rem,6vw,5.5rem); line-height:.96; letter-spacing:-.025em; color:var(--h-text); margin:0 0 2.5rem; }
@@ -60,8 +60,8 @@
 .h-manifesto { padding:9rem 3rem; position:relative; z-index:1; }
 .h-manifesto-inner { max-width:820px; padding-left:3rem; border-left:2px solid var(--h-gold); }
 .h-manifesto-text { font-family:var(--h-fd); font-weight:700; font-size:clamp(2rem,5.5vw,5rem); line-height:1.08; letter-spacing:-.025em; color:var(--h-text); margin-bottom:2rem; }
-.h-manifesto-body { font-size:clamp(.88rem,1.2vw,1rem); font-weight:400; line-height:1.75; color:var(--h-muted); max-width:500px; margin-bottom:1.5rem; }
-.h-manifesto-mark { font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--h-gold); }
+.h-manifesto-body { font-size:1rem; font-weight:400; line-height:1.75; color:rgba(255,255,255,0.65); max-width:500px; margin-bottom:1.5rem; }
+.h-manifesto-mark { display:block; font-size:.65rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--h-gold); margin-top:2rem; }
 
 /* ── Portfolio ─────────────────────────────────────────────────────────────  */
 .h-portfolio { padding:0 3rem 10rem; position:relative; z-index:1; }
@@ -107,9 +107,9 @@
 .h-div-label { font-family:var(--h-fd); font-size:.6rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--h-gold); white-space:nowrap; }
 .h-div-rule { flex:1; height:1px; background:var(--h-border); }
 .h-div-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
-.h-div-card { position:relative; display:flex; flex-direction:column; padding:3rem 2.5rem 2.25rem; background:var(--h-surf); border:1px solid var(--h-border); border-left:4px solid rgba(201,150,58,.4); text-decoration:none; transition:background .25s, border-left-color .25s; }
+.h-div-card { position:relative; display:flex; flex-direction:column; padding:2.5rem; min-height:280px; background:var(--h-surf); border:1px solid var(--h-border); border-left:4px solid rgba(201,150,58,.4); text-decoration:none; transition:background .25s, border-left-color .25s; }
 .h-div-card:hover { background:rgba(201,150,58,.04); border-left-color:var(--h-gold); }
-.h-div-icon { width:56px; height:56px; object-fit:contain; margin-bottom:2rem; transition:transform .25s ease; }
+.h-div-icon { width:64px; height:64px; object-fit:contain; margin-bottom:2rem; transition:transform .25s ease; }
 .h-div-card:hover .h-div-icon { transform:translateY(-4px); }
 .h-div-name { font-family:var(--h-fd); font-weight:800; font-size:1.5rem; letter-spacing:-.02em; color:var(--h-text); line-height:1.15; margin-bottom:1rem; transition:color .25s; }
 .h-div-card:hover .h-div-name { color:var(--h-gold); }
