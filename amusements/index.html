@@ -9,7 +9,7 @@
     <title>SMART Amusement World</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/cursor.css">
     <link rel="stylesheet" href="../css/loading.css">
     <link rel="stylesheet" href="../css/custom-scrollbar.css">
@@ -39,7 +39,7 @@
             <div class="a-nav-left">
                 <a href="../" class="a-nav-home">← SMART Holdings</a>
                 <span class="a-nav-sep">|</span>
-                <span class="a-nav-brand">Amusement World</span>
+                <img src="../Images/SMARTAmusementTransparent.png" alt="SMART Amusement World" class="a-nav-logo-img">
             </div>
             <a href="#contact" class="a-nav-cta">Get Support</a>
         </div>
@@ -50,16 +50,21 @@
 
         <section class="a-hero">
             <div class="a-hero-inner">
-                <p class="a-hero-tag">SMART Amusement World</p>
-                <h1 class="a-headline">
-                    <span class="a-hl a-hl-normal">Downtime</span>
-                    <span class="a-hl a-hl-accent">is not</span>
-                    <span class="a-hl a-hl-outline">an option.</span>
-                </h1>
-                <p class="a-hero-body">We keep arcade venues and cinema facilities running. Parts, field service, and on-site support — when your business needs it most.</p>
-                <div class="a-hero-actions">
-                    <a href="#contact" class="a-btn-primary">Get Support →</a>
-                    <a href="#services" class="a-btn-ghost">Our Services</a>
+                <div class="a-hero-content">
+                    <p class="a-hero-tag">SMART Amusement World</p>
+                    <h1 class="a-headline">
+                        <span class="a-hl a-hl-normal">Downtime</span>
+                        <span class="a-hl a-hl-accent">is not</span>
+                        <span class="a-hl a-hl-outline">an option.</span>
+                    </h1>
+                    <p class="a-hero-body">We keep arcade venues and cinema facilities running. Parts, field service, and on-site support — when your business needs it most.</p>
+                    <div class="a-hero-actions">
+                        <a href="#contact" class="a-btn-primary">Get Support →</a>
+                        <a href="#services" class="a-btn-ghost">Our Services</a>
+                    </div>
+                </div>
+                <div class="a-hero-visual">
+                    <img src="../Images/SMARTAmusementTransparent.png" alt="SMART Amusement World" class="a-hero-logo-img">
                 </div>
             </div>
         </section>
@@ -129,15 +134,15 @@
                 <div class="a-sec-rule"></div>
             </div>
             <div class="a-promise-grid">
-                <div class="a-promise-item">
+                <div class="a-promise-item" data-num="01">
                     <h3>One <span>call.</span></h3>
                     <p>Single point of contact for all your equipment needs — parts, repair, or a full service contract. No bouncing between departments.</p>
                 </div>
-                <div class="a-promise-item">
+                <div class="a-promise-item" data-num="02">
                     <h3>Fast <span>dispatch.</span></h3>
                     <p>On-site technicians within 24 hours for service calls. Remote diagnostics available before we roll a truck.</p>
                 </div>
-                <div class="a-promise-item">
+                <div class="a-promise-item" data-num="03">
                     <h3>Parts <span>ready.</span></h3>
                     <p>Core SKUs for legacy and modern cabinets held locally — your machines don't wait on international freight.</p>
                 </div>
@@ -212,7 +217,7 @@
     <footer class="a-footer">
         <div class="a-footer-inner">
             <div class="a-footer-left">
-                <span class="a-footer-logo">SMART AMU</span>
+                <img src="../Images/SMARTAmusementTransparent.png" alt="SMART Amusement World" class="a-footer-logo-img">
                 <span class="a-footer-copy">&copy; <span id="currentYear"></span> SMART Holding Business Fusion</span>
             </div>
             <nav class="a-footer-nav">
@@ -265,13 +270,12 @@
             gsap.from('.a-contact-header h2', { scrollTrigger: { trigger: '.a-contact', start: 'top 75%' }, y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' });
         }
         document.querySelectorAll('.a-svc-row').forEach(function (row) {
-            var link = row.querySelector('.a-svc-link');
-            var arr  = row.querySelector('.a-svc-arr');
+            var arr = row.querySelector('.a-svc-arr');
             row.addEventListener('mouseenter', function () {
-                if (window.gsap) { gsap.to(link, { color: '#F07820', duration: 0.2 }); gsap.to(arr, { x: 5, duration: 0.2 }); }
+                if (window.gsap) { gsap.to(arr, { x: 5, duration: 0.2 }); }
             });
             row.addEventListener('mouseleave', function () {
-                if (window.gsap) { gsap.to(link, { color: 'rgba(232,232,240,0.45)', duration: 0.2 }); gsap.to(arr, { x: 0, duration: 0.2 }); }
+                if (window.gsap) { gsap.to(arr, { x: 0, duration: 0.2 }); }
             });
         });
     })();
