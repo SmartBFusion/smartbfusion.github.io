@@ -1,0 +1,79 @@
+/* Advanced Kinetic Typography Styles - Fixed Alignment */
+
+.pre-category-intro {
+    min-height: 200vh;
+    padding: 8rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem var(--spacing-lg);
+    min-height: 200vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    text-align: left;
+}
+
+
+/* Kinetic Typography (Line-based) */
+.kt-line {
+    margin: 0 auto 3rem auto;
+    line-height: 1.7;
+    font-size: clamp(1.6rem, 4vw, 2.15rem);
+    text-align: left;
+    position: relative;
+    opacity: 0.15;
+    transform: translateY(32px) scale(0.98);
+    font-family: var(--font-primary, 'Inter', Arial, sans-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    word-spacing: 0.04em;
+    transition: none;
+    will-change: transform, opacity;
+}
+
+.kt-line strong,
+.kt-line .kt-em {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-family: var(--font-primary, 'Inter', Arial, sans-serif);
+    letter-spacing: -0.01em;
+    transition: color 0.25s ease, font-weight 0.25s ease, transform 0.25s ease;
+    text-shadow: 0 2px 8px rgba(32, 85, 135, 0.12);
+    font-size: 1em;
+    display: inline-block;
+    vertical-align: baseline;
+    transform-origin: 50% 75%;
+}
+
+/* Accent font (for key highlights only) */
+.kt-line .kt-em-accent {
+    font-family: var(--font-accent, 'Space Grotesk', Arial, sans-serif);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pre-category-intro {
+        min-height: 150vh;
+        padding: 4rem 0;
+    }
+    .intro-content {
+        min-height: 150vh;
+        padding: 2rem var(--spacing-md);
+        max-width: 640px;
+    }
+    .kt-line {
+        font-size: clamp(1.35rem, 5vw, 1.65rem);
+        margin-bottom: 2rem;
+        line-height: 1.7;
+        text-align: left;
+    }
+    .kt-line .kt-em {
+        font-size: 1.08em !important;
+    }
+}

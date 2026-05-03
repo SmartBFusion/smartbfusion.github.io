@@ -1,0 +1,168 @@
+/* Premium Visual Refinements - Final Polish */
+
+/* ============================================
+   Enhanced Whitespace & Layout Confidence
+   ============================================ */
+
+.pre-category-intro {
+    padding: 12rem 0;
+    min-height: 100vh;
+}
+
+.intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* ============================================
+   Premium Text Treatments
+   ============================================ */
+
+.intro-line-1,
+.intro-line-2 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.8;
+    letter-spacing: -0.01em;
+}
+
+.intro-line-1 {
+    font-weight: 300;
+}
+
+.intro-line-2 {
+    font-weight: 400;
+}
+
+/* ============================================
+   Advanced Hover States
+   ============================================ */
+
+a {
+    position: relative;
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* Links in cards don't need underline */
+.division-card a::after,
+.btn-primary::after,
+.btn-secondary::after {
+    display: none;
+}
+
+/* ============================================
+   Section Active States
+   ============================================ */
+
+.section-active {
+    position: relative;
+}
+
+.section-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        var(--color-accent) 0%, 
+        transparent 100%);
+    opacity: 0.5;
+}
+
+/* ============================================
+   Premium Background Effects
+   ============================================ */
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, 
+        rgba(32, 85, 135, 0.1) 0%, 
+        transparent 50%);
+    pointer-events: none;
+}
+
+/* ============================================
+   Refined Grid Systems
+   ============================================ */
+
+.divisions-grid {
+    padding: 2rem 0;
+}
+
+@media (min-width: 1400px) {
+    .divisions-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .division-card.featured {
+        grid-column: span 1;
+    }
+}
+
+/* ============================================
+   Premium Focus States
+   ============================================ */
+
+*:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+/* ============================================
+   Smooth Performance
+   ============================================ */
+
+.division-card,
+.btn-primary,
+.btn-secondary {
+    will-change: transform;
+}
+
+.division-card:hover,
+.btn-primary:hover,
+.btn-secondary:hover {
+    will-change: auto;
+}
+
+/* ============================================
+   Premium Shadows & Depth
+   ============================================ */
+
+.division-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.division-card:hover {
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.14),
+                0 0 0 1px rgba(32, 85, 135, 0.1);
+    transform: translateY(-4px);
+}
+
+.division-card.featured:hover {
+    box-shadow: 0 24px 60px rgba(32, 85, 135, 0.2),
+                0 0 0 1px rgba(32, 85, 135, 0.2);
+}
+

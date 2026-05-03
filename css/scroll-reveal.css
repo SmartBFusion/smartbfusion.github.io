@@ -1,0 +1,157 @@
+/* Advanced Scroll Reveal Animations */
+
+.pre-category-intro {
+    padding: var(--spacing-xxl) 0;
+    min-height: 200vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--color-bg-dark) 0%, var(--color-bg) 100%);
+}
+
+.intro-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    min-height: 200vh;
+}
+
+.intro-line {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 400;
+    will-change: opacity, transform;
+}
+
+.intro-line-1 {
+    font-weight: 300;
+    letter-spacing: -0.01em;
+}
+
+.intro-line-2 {
+    font-weight: 400;
+    letter-spacing: -0.005em;
+}
+
+.intro-line-3.intro-cta {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--color-text-light);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: var(--spacing-xxl);
+    margin-bottom: 0;
+}
+
+/* Hero Reveal Animations */
+.hero-title-reveal,
+.hero-subtitle-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: opacity, transform;
+}
+
+.hero-title-reveal {
+    clip-path: inset(0 0 100% 0);
+}
+
+.hero-subtitle-reveal {
+    clip-path: inset(0 0 100% 0);
+}
+
+/* Fallback: ensure hero is visible after load even if ScrollTrigger is out of sync */
+body.loaded .hero-title-reveal,
+body.loaded .hero-subtitle-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
+}
+
+/* Text Reveal with Clip Path */
+.text-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    clip-path: inset(0 0 100% 0);
+    will-change: opacity, transform, clip-path;
+}
+
+.text-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
+}
+
+/* Depth-based Motion */
+.depth-layer-1 {
+    transform: translateZ(0);
+}
+
+.depth-layer-2 {
+    transform: translateZ(20px);
+}
+
+.depth-layer-3 {
+    transform: translateZ(40px);
+}
+
+/* Progressive Word Reveal */
+.word-reveal {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Character Reveal */
+.char-reveal {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px) rotateX(90deg);
+}
+
+/* Section Entrance Animations */
+.section-enter {
+    opacity: 0;
+    transform: translateY(80px);
+    will-change: opacity, transform;
+}
+
+.section-enter.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Layered Reveal */
+.layered-reveal {
+    position: relative;
+}
+
+.layered-reveal .layer {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.layered-reveal .layer-1 {
+    transition-delay: 0.1s;
+}
+
+.layered-reveal .layer-2 {
+    transition-delay: 0.2s;
+}
+
+.layered-reveal .layer-3 {
+    transition-delay: 0.3s;
+}
+
+/* Smooth Scrolling Enhancement */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Performance Optimization */
+.will-animate {
+    will-change: transform, opacity;
+}
+
