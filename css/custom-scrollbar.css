@@ -1,5 +1,9 @@
 /* Custom Scrollbar - Non-Standard Location (Left Side) - Always Visible */
 
+/* Hide native browser scrollbar — custom DOM scrollbar replaces it */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+
 .custom-scrollbar-container {
     position: fixed !important;
     left: 1.5rem !important;
