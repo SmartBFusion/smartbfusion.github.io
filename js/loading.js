@@ -17,7 +17,6 @@
     // Check if everything is already loaded
     function checkIfAlreadyLoaded() {
         const gsapLoaded = typeof gsap !== 'undefined';
-        const threeLoaded = typeof THREE !== 'undefined';
         const fontsLoaded = document.fonts ? document.fonts.check('1em sans-serif') : true; // Fallback to true if API not available
         const domReady = document.readyState !== 'loading';
         
@@ -28,7 +27,7 @@
             imagesLoaded = Array.from(images).every(img => img.complete && img.naturalHeight !== 0);
         }
 
-        return gsapLoaded && threeLoaded && fontsLoaded && domReady && imagesLoaded;
+        return gsapLoaded && fontsLoaded && domReady && imagesLoaded;
     }
 
     function updateProgress(progress) {

@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/cursor.css">
     <link rel="stylesheet" href="../css/loading.css">
     <link rel="stylesheet" href="../css/custom-scrollbar.css">
     <link rel="stylesheet" href="../css/amusements.css">
@@ -26,12 +25,6 @@
             <div class="loading-text">Loading</div>
         </div>
     </div>
-    <div id="cursor"></div>
-    <div id="cursor-trail"></div>
-    <div id="triangle-transition" class="triangle-transition">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="100,0 100,100 0,100"></polygon></svg>
-    </div>
-
     <nav class="a-nav" id="a-nav">
         <div class="a-nav-inner">
             <div class="a-nav-left">
@@ -46,43 +39,44 @@
     <div id="smooth-scroll-container">
     <main>
 
-        <section class="a-hero">
-            <div class="a-hero-inner">
-                <div class="a-hero-content">
-                    <p class="a-hero-tag">SMART Amusement World</p>
-                    <h1 class="a-headline">
-                        <span class="a-hl a-hl-normal">Downtime</span>
-                        <span class="a-hl a-hl-accent">is not</span>
-                        <span class="a-hl a-hl-outline">an option.</span>
-                    </h1>
-                    <p class="a-hero-body">We keep arcade venues and cinema facilities running. Parts, field service, and on-site support — when your business needs it most.</p>
-                    <div class="a-hero-actions">
-                        <a href="#contact" class="a-btn-primary">Get Support →</a>
-                        <a href="#services" class="a-btn-ghost">Our Services</a>
-                    </div>
+        <section class="a-hero" id="services">
+            <div class="a-hero-top">
+                <img src="../Images/SMARTAmusementTransparent.png" alt="SMART Amusement World" class="a-hero-logo-img">
+                <p class="a-hero-tag">SMART Amusement World</p>
+                <h1 class="a-headline">Machines don't wait.<br>Neither do we.</h1>
+                <p class="a-hero-body">Service desk for arcade venues and cinema operators. Parts, field repair, and integration support with fast turnaround.</p>
+                <div class="a-hero-actions">
+                    <a href="#contact" class="a-btn-primary">Get Support</a>
+                    <a href="tel:+966501291245" id="a-hero-phone" class="a-btn-ghost">+966 50 129 1245</a>
                 </div>
-                <div class="a-hero-visual">
-                    <img src="../Images/SMARTAmusementTransparent.png" alt="SMART Amusement World" class="a-hero-logo-img">
-                </div>
+            </div>
+            <div class="a-hero-services">
+                <a href="spare-parts/" class="a-hero-row">
+                    <span class="a-hero-row-title">Spare Parts</span>
+                    <span class="a-hero-row-desc">Components for any cabinet</span>
+                    <span class="a-hero-row-arrow">→</span>
+                </a>
+                <a href="arcade-machine-service/" class="a-hero-row">
+                    <span class="a-hero-row-title">Machine Service</span>
+                    <span class="a-hero-row-desc">On-site repair, 24hr dispatch</span>
+                    <span class="a-hero-row-arrow">→</span>
+                </a>
+                <a href="cinema/" class="a-hero-row">
+                    <span class="a-hero-row-title">Cinema Equipment</span>
+                    <span class="a-hero-row-desc">Projection, audio, integration</span>
+                    <span class="a-hero-row-arrow">→</span>
+                </a>
             </div>
         </section>
 
-        <div class="a-marquee-wrap" aria-hidden="true">
-            <div class="a-marquee-track">
-                <span>SPARE PARTS</span><span class="a-msep">·</span>
-                <span>ARCADE REPAIR</span><span class="a-msep">·</span>
-                <span>CINEMA SYSTEMS</span><span class="a-msep">·</span>
-                <span>ON-SITE SERVICE</span><span class="a-msep">·</span>
-                <span>EMERGENCY SUPPORT</span><span class="a-msep">·</span>
-                <span>SERVICE CONTRACTS</span><span class="a-msep">·</span>
-                <span>SPARE PARTS</span><span class="a-msep">·</span>
-                <span>ARCADE REPAIR</span><span class="a-msep">·</span>
-                <span>CINEMA SYSTEMS</span><span class="a-msep">·</span>
-                <span>ON-SITE SERVICE</span><span class="a-msep">·</span>
-                <span>EMERGENCY SUPPORT</span><span class="a-msep">·</span>
-                <span>SERVICE CONTRACTS</span><span class="a-msep">·</span>
+        <section class="a-stats" aria-label="Service statistics">
+            <div class="a-stats-grid">
+                <div class="a-stat"><span class="a-stat-num">24h</span><span class="a-stat-label">Dispatch Target</span></div>
+                <div class="a-stat"><span class="a-stat-num">300+</span><span class="a-stat-label">Machines Serviced</span></div>
+                <div class="a-stat"><span class="a-stat-num">1200+</span><span class="a-stat-label">Parts Delivered</span></div>
+                <div class="a-stat"><span class="a-stat-num">2</span><span class="a-stat-label">Core Verticals</span></div>
             </div>
-        </div>
+        </section>
 
         <section class="a-services" id="services">
             <div class="a-sec-header">
@@ -156,11 +150,11 @@
                 <div class="a-contact-info">
                     <div class="a-contact-item">
                         <span class="a-ci-label">Email</span>
-                        <a href="mailto:arcade@smartbusinessfusion.com">arcade@smartbusinessfusion.com</a>
+                        <a href="mailto:arcade@smartbfusion.com" id="a-contact-email">arcade@smartbfusion.com</a>
                     </div>
                     <div class="a-contact-item">
                         <span class="a-ci-label">Phone / WhatsApp</span>
-                        <a href="tel:+94773689366">+94 77 368 9366</a>
+                        <a href="tel:+966501291245" id="a-contact-phone">+966 50 129 1245</a>
                     </div>
                     <div class="a-contact-item">
                         <span class="a-ci-label">Response time</span>
@@ -185,7 +179,7 @@
                         </div>
                         <div class="a-form-group">
                             <label for="cf-phone">Phone / WhatsApp</label>
-                            <input type="tel" id="cf-phone" name="phone" placeholder="+94 77 000 0000">
+                            <input type="tel" id="cf-phone" name="phone" placeholder="+966 50 000 0000">
                         </div>
                     </div>
                     <div class="a-form-group">
@@ -234,9 +228,22 @@
         </button>
     </div>
 
+    <script>
+    (function () {
+        // Hide loader completely for fast page renders (<1.5s)
+        if (performance.now() < 1500) {
+            document.documentElement.classList.add('a-fast-load');
+            document.addEventListener('DOMContentLoaded', function () {
+                var loader = document.getElementById('loading-screen');
+                if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+                document.body.classList.add('loaded');
+            });
+        }
+    })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../js/config.js"></script>
     <script src="../js/loading.js"></script>
-    <script src="../js/cursor.js"></script>
     <script src="../js/contact-form.js"></script>
     <script src="../js/security.js"></script>
     <script>
@@ -247,17 +254,30 @@
         if (nav) window.addEventListener('scroll', function () {
             nav.classList.toggle('scrolled', window.scrollY > 60);
         }, { passive: true });
-        var track = document.querySelector('.a-marquee-track');
-        if (track && window.gsap) gsap.to(track, { x: '-50%', duration: 18, ease: 'none', repeat: -1 });
-        if (window.gsap) {
-            var tl = gsap.timeline({ delay: 0.3 });
-            tl.from('.a-hero-tag',     { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' })
-              .from('.a-hl',           { y: 90, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, '-=0.2')
-              .from('.a-hero-body',    { y: 20, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
-              .from('.a-hero-actions', { y: 15, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15');
+        function runHeroAnim() {
+            if (!window.gsap) return;
+            var tl = gsap.timeline();
+            tl.from('.a-hero-logo-img', { y: 14, duration: 0.55, ease: 'power2.out' })
+              .from('.a-hero-tag',      { y: 10, duration: 0.4, ease: 'power2.out' }, '-=0.25')
+              .from('.a-headline',      { y: 22, duration: 0.6, ease: 'power3.out' }, '-=0.2')
+              .from('.a-hero-body',     { y: 12, duration: 0.45, ease: 'power2.out' }, '-=0.25')
+              .from('.a-hero-actions',  { y: 10, duration: 0.4, ease: 'power2.out' }, '-=0.25')
+              .from('.a-hero-row',      { y: 10, duration: 0.4, ease: 'power2.out', stagger: 0.08 }, '-=0.2');
+        }
+        if (document.body.classList.contains('loaded')) {
+            runHeroAnim();
+        } else {
+            var observer = new MutationObserver(function () {
+                if (document.body.classList.contains('loaded')) {
+                    observer.disconnect();
+                    runHeroAnim();
+                }
+            });
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
         }
         if (window.gsap && window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
+            gsap.from('.a-stat', { scrollTrigger: { trigger: '.a-stats', start: 'top 88%' }, y: 15, opacity: 0, duration: 0.45, ease: 'power2.out', stagger: 0.08 });
             document.querySelectorAll('.a-svc-row').forEach(function (row, i) {
                 gsap.from(row, { scrollTrigger: { trigger: row, start: 'top 85%' }, y: 30, opacity: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.1 });
             });
@@ -275,6 +295,45 @@
                 if (window.gsap) { gsap.to(arr, { x: 0, duration: 0.2 }); }
             });
         });
+
+        // Use config endpoint values for amusements contact details with Saudi fallback.
+        var fallbackEmail = 'arcade@smartbfusion.com';
+        var fallbackPhone = '+966 50 129 1245';
+        function applyAmusementsContact(email, phone) {
+            var normalizedEmail = email || fallbackEmail;
+            var normalizedPhone = phone || fallbackPhone;
+            // Keep Saudi fallback when config still holds legacy non-Saudi numbers.
+            if (!/^\+966\b/.test(normalizedPhone)) normalizedPhone = fallbackPhone;
+            var tel = normalizedPhone.replace(/\s+/g, '');
+
+            var emailEl = document.getElementById('a-contact-email');
+            var phoneEl = document.getElementById('a-contact-phone');
+            var heroPhone = document.getElementById('a-hero-phone');
+            if (emailEl) {
+                emailEl.href = 'mailto:' + normalizedEmail;
+                emailEl.textContent = normalizedEmail;
+            }
+            if (phoneEl) {
+                phoneEl.href = 'tel:' + tel;
+                phoneEl.textContent = normalizedPhone;
+            }
+            if (heroPhone) {
+                heroPhone.href = 'tel:' + tel;
+                heroPhone.textContent = normalizedPhone;
+            }
+        }
+
+        applyAmusementsContact(fallbackEmail, fallbackPhone);
+        fetch('https://smart.smartbf.workers.dev/config', { method: 'GET', cache: 'no-cache' })
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .then(function (cfg) {
+                if (!cfg || !cfg.divisions || !cfg.divisions.amusements || !cfg.divisions.amusements.contact) return;
+                var c = cfg.divisions.amusements.contact;
+                applyAmusementsContact(c.email, c.phone);
+            })
+            .catch(function () {
+                // keep fallback values
+            });
     })();
     </script>
 </body>
